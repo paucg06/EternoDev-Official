@@ -7,7 +7,7 @@
     "short_text": "¡Naciste gato, pero morirás como leyenda!",
     "type": "html",
     "p_windows": false,
-    "p_linux": false,
+    "p_linux": true,
     "p_osx": false,
     "published": true,
     "genre": "Adventure",
@@ -38,7 +38,7 @@
     "p_linux": true,
     "p_osx": true,
     "published": true,
-    "genre": "Action / Bullet Hell",
+    "genre": "Action",
     "p_browser": true
   },
   {
