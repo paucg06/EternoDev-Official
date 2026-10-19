@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1366 1865" width="100%" height="auto" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="reasonsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b1809" />
+      <stop offset="100%" stop-color="#121008" />
+    </linearGradient>
+  </defs>
+  <path d="m0 0c116.11946 290.396453 281.272956 427.561316 495.460489 411.49459 321.2813-24.100089 435.353371-112.669322 650.033631-112.669322 143.12017 0 268.2888 68.131638 375.50588 204.394915v1519.779817h-1521z" fill="url(#reasonsGrad)"/>
+</svg>

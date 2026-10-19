@@ -160,30 +160,131 @@ function initWebVisitCounter() {
 }
 
 // ==========================================================================
-// Parallax interactivo para los objetos flotantes 3D en Sobre Mi
+// Sobre Mí: Parallax de Scroll y Ratón para Objetos Flotantes 3D
 // ==========================================================================
 function initAboutParallax() {
   const aboutTab = document.getElementById('tab-about');
   if (!aboutTab) return;
 
+  // 1) Parallax en Scroll (efecto de profundidad idéntico a Stellar.js)
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (!aboutTab.classList.contains('active-tab')) {
+          ticking = false;
+          return;
+        }
+        const parallaxItems = aboutTab.querySelectorAll('.parallax-scroll');
+        parallaxItems.forEach(item => {
+          const speed = parseFloat(item.getAttribute('data-speed')) || 0.2;
+          const rect = item.getBoundingClientRect();
+          const offset = (window.innerHeight - rect.top) * speed * 0.45;
+          item.style.transform = `translate3d(0, ${offset}px, 0)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // 2) Sutil Parallax al mover el ratón
   aboutTab.addEventListener('mousemove', (e) => {
     const rect = aboutTab.getBoundingClientRect();
     const relX = (e.clientX - rect.left) / rect.width - 0.5;
     const relY = (e.clientY - rect.top) / rect.height - 0.5;
 
-    const items = aboutTab.querySelectorAll('.crazy-floating-item');
+    const items = aboutTab.querySelectorAll('.crazy-path-img');
     items.forEach((item, idx) => {
-      const depth = (idx % 3 + 1) * 16;
-      item.style.transform = `translate3d(${relX * depth}px, ${relY * depth}px, 0)`;
+      const depth = ((idx % 3) + 1) * 18;
+      const speed = parseFloat(item.getAttribute('data-speed')) || 0.2;
+      const scrollOffset = (window.innerHeight - item.getBoundingClientRect().top) * speed * 0.45;
+      item.style.transform = `translate3d(${relX * depth}px, ${scrollOffset + (relY * depth)}px, 0)`;
     });
+  });
+}
+
+// ==========================================================================
+// Animación CountUp de Estadísticas al hacer Scroll
+// ==========================================================================
+function initCrazyCounters() {
+  const counters = document.querySelectorAll('.crazy-counter-val');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        const duration = 1600;
+        const startTime = performance.now();
+
+        function updateCounter(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const easeProgress = 1 - (1 - progress) * (1 - progress);
+          const current = Math.floor(easeProgress * target);
+          el.textContent = current.toLocaleString();
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            el.textContent = target.toLocaleString();
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  counters.forEach(counter => observer.observe(counter));
+}
+
+// ==========================================================================
+// Slider 3D de las 5 Razones (Estilo CrazyGames Carousel)
+// ==========================================================================
+let currentReasonsSlide = 0;
+
+function goToReasonsSlide(index) {
+  const slides = document.querySelectorAll('.reasons-slide-item');
+  const bullets = document.querySelectorAll('.reasons-bullet');
+  if (!slides.length) return;
+
+  const total = slides.length;
+  currentReasonsSlide = (index + total) % total;
+
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle('active', idx === currentReasonsSlide);
   });
 
-  aboutTab.addEventListener('mouseleave', () => {
-    const items = aboutTab.querySelectorAll('.crazy-floating-item');
-    items.forEach(item => {
-      item.style.transform = '';
-    });
+  bullets.forEach((bullet, idx) => {
+    bullet.classList.toggle('active', idx === currentReasonsSlide);
   });
+}
+
+function moveReasonsSlide(dir) {
+  goToReasonsSlide(currentReasonsSlide + dir);
+}
+
+function initReasonsSwipe() {
+  const track = document.getElementById('reasonsTrack');
+  if (!track) return;
+
+  let startX = 0;
+  let dist = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    startX = e.changedTouches[0].pageX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    dist = e.changedTouches[0].pageX - startX;
+    if (Math.abs(dist) > 45) {
+      if (dist < 0) moveReasonsSlide(1);
+      else moveReasonsSlide(-1);
+    }
+  }, { passive: true });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -194,6 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateAllBookmarkButtons();
   initWebVisitCounter();
   initAboutParallax();
+  initCrazyCounters();
+  initReasonsSwipe();
 });
 
 // Modales interactivos (Guardados & Notificaciones)
@@ -288,6 +391,9 @@ function switchTab(tabId, updateUrl = true) {
   }
   if (tabId === 'home' || tabId === 'videos') {
     setTimeout(initVideosCarousel, 50);
+  }
+  if (tabId === 'about') {
+    setTimeout(initCrazyCounters, 50);
   }
 }
 

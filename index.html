@@ -949,102 +949,110 @@
     }
 
     /* ==========================================================================
-       SECCION SOBRE MI - ESTILO CRAZYGAMES (AMARILLO & OBJETOS 3D FLOTANTES)
+       SECCION SOBRE MI - ESTILO CRAZYGAMES (IDENTICA ESCALA GIGANTE & AMARILLO)
        ========================================================================== */
     .crazy-about-wrapper {
       position: relative;
       background-color: #0c0d13;
       color: #FFFFFF;
       font-family: 'Nunito', var(--font-main), sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
-    /* Objetos 3D Flotantes (PNGs reemplazables en assets/about/) */
-    .crazy-floating-item {
+    /* Floating Path & 3D Objects (Archivos PNG reemplazables en assets/about/) */
+    .crazy-path-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1440px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .crazy-path-img {
       position: absolute;
       pointer-events: none;
-      z-index: 2;
       user-select: none;
-      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
-      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
       will-change: transform;
+      filter: drop-shadow(0 18px 45px rgba(0, 0, 0, 0.55));
+      transition: transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
     }
 
-    /* Animaciones Flotantes */
-    @keyframes crazyBob1 {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-22px) rotate(4deg); }
+    /* Floating Drifting Keyframes */
+    @keyframes crazyDrift1 {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      25% { transform: translate(14px, -24px) rotate(3deg); }
+      50% { transform: translate(-10px, -45px) rotate(-2deg); }
+      75% { transform: translate(-20px, -18px) rotate(2deg); }
     }
-    @keyframes crazyBob2 {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(20px) rotate(-5deg); }
+    @keyframes crazyDrift2 {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      25% { transform: translate(-18px, 22px) rotate(-4deg); }
+      50% { transform: translate(15px, 42px) rotate(3deg); }
+      75% { transform: translate(22px, 16px) rotate(-1deg); }
     }
-    @keyframes crazyBob3 {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-16px) rotate(-3deg); }
-    }
-    @keyframes crazyBobSlow {
-      0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-      50% { transform: translateY(14px) rotate(2deg) scale(1.03); }
+    @keyframes crazyDrift3 {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      33% { transform: translate(16px, -30px) rotate(4deg); }
+      66% { transform: translate(-14px, 25px) rotate(-3deg); }
     }
 
-    .anim-float-1 { animation: crazyBob1 6.5s ease-in-out infinite; }
-    .anim-float-2 { animation: crazyBob2 7.8s ease-in-out infinite; }
-    .anim-float-3 { animation: crazyBob3 6s ease-in-out infinite; }
-    .anim-float-slow { animation: crazyBobSlow 9s ease-in-out infinite; }
+    .anim-drift-1 { animation: crazyDrift1 8s ease-in-out infinite; }
+    .anim-drift-2 { animation: crazyDrift2 9.5s ease-in-out infinite; }
+    .anim-drift-3 { animation: crazyDrift3 7s ease-in-out infinite; }
 
-    /* Ondas SVG Amarillas de fondo */
-    .crazy-wave-divider {
-      display: block;
-      width: 100%;
-      height: auto;
-      pointer-events: none;
+    /* 1. HERO SECTION (CrazyGames .home) */
+    .crazy-hero {
       position: relative;
-      z-index: 1;
-      margin-top: -1px;
-    }
-
-    /* 1. HERO SECTION */
-    .crazy-hero-section {
-      position: relative;
-      min-height: 560px;
+      min-height: calc(100vh - 70px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 110px 24px 80px;
-      background: radial-gradient(circle at 50% 25%, rgba(253, 211, 29, 0.12) 0%, rgba(12, 13, 19, 0.98) 72%);
+      padding: 140px 24px 60px;
+      background: radial-gradient(circle at 50% 30%, rgba(253, 211, 29, 0.14) 0%, rgba(12, 13, 19, 0.98) 75%);
+      overflow: hidden;
     }
 
-    .crazy-hero-content {
+    .crazy-hero-wrapper {
       position: relative;
       z-index: 3;
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
     .crazy-hero-logo {
-      width: 250px;
-      max-width: 80vw;
+      width: 290px;
+      max-width: 82vw;
       height: auto;
-      margin-bottom: 28px;
-      filter: drop-shadow(0 6px 25px rgba(253, 211, 29, 0.3));
+      margin-bottom: 24px;
+      filter: drop-shadow(0 8px 30px rgba(253, 211, 29, 0.4));
     }
 
     .crazy-hero-title {
-      font-family: 'Nunito', sans-serif;
-      font-size: 2.85rem;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 900;
-      line-height: 1.18;
+      line-height: 1.15;
       color: #FFFFFF;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
       letter-spacing: -0.5px;
     }
 
     .crazy-hero-title span {
       color: #FDD31D;
-      text-shadow: 0 0 30px rgba(253, 211, 29, 0.35);
+      text-shadow: 0 0 35px rgba(253, 211, 29, 0.4);
+    }
+
+    .crazy-hero-desc {
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      color: #E2E8F0;
+      font-weight: 600;
+      line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto 35px;
     }
 
     .crazy-scroll-down {
@@ -1052,185 +1060,469 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      margin-top: 30px;
       cursor: pointer;
       text-decoration: none;
       user-select: none;
     }
 
     .crazy-scroll-text {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 900;
-      letter-spacing: 2.5px;
+      letter-spacing: 3px;
       color: #FDD31D;
       text-transform: uppercase;
     }
 
     .crazy-scroll-arrow {
-      width: 38px;
-      height: 38px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: rgba(253, 211, 29, 0.15);
-      border: 1px solid rgba(253, 211, 29, 0.4);
+      border: 1.5px solid rgba(253, 211, 29, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #FDD31D;
-      animation: bounceArrow 2s infinite ease-in-out;
+      animation: crazyBounceArrow 2s infinite ease-in-out;
     }
 
-    @keyframes bounceArrow {
+    @keyframes crazyBounceArrow {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(8px); }
-      60% { transform: translateY(4px); }
+      40% { transform: translateY(10px); }
+      60% { transform: translateY(5px); }
     }
 
-    /* 2. STATS SECTION */
-    .crazy-stats-section {
+    /* Curved Divider into .we */
+    .crazy-curve-divider {
       position: relative;
-      padding: 100px 24px 130px;
-      background: linear-gradient(180deg, #0c0d13 0%, #17150a 50%, #0d0e14 100%);
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin-top: -2px;
+      z-index: 2;
+    }
+
+    .crazy-curve-divider img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 2. STATS SECTION (CrazyGames .we - Identical Asymmetric Layout) */
+    .crazy-we {
+      position: relative;
+      background-color: #14130c;
+      padding: 60px 24px 160px;
       overflow: hidden;
     }
 
-    .crazy-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 75px 50px;
-      max-width: 950px;
+    .crazy-we-box-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 860px;
       margin: 0 auto;
       position: relative;
       z-index: 3;
     }
 
-    .crazy-stat-card {
+    .crazy-we-box {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      width: 100%;
+      max-width: 580px;
     }
 
-    .crazy-stat-intro {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #CBD5E1;
-      margin-bottom: 4px;
-      letter-spacing: 0.2px;
+    .crazy-we-box-1 {
+      margin-right: auto;
+      padding-bottom: 180px;
     }
 
-    .crazy-stat-num {
-      font-family: 'Nunito', sans-serif;
-      font-size: 5.4rem;
-      font-weight: 900;
-      line-height: 1;
+    .crazy-we-box-2 {
+      margin-left: auto;
+      position: relative;
+      left: -40px;
+      padding-bottom: 210px;
+    }
+
+    .crazy-we-box-3 {
+      margin-right: auto;
+      position: relative;
+      left: -15px;
+      padding-bottom: 220px;
+    }
+
+    .crazy-we-box-4 {
+      margin-left: auto;
+      padding-bottom: 140px;
+    }
+
+    .crazy-we-box-title {
       color: #FFFFFF;
-      margin: 6px 0 10px;
-      letter-spacing: -2px;
-      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300;
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
     }
 
-    .crazy-stat-num i {
+    .crazy-we-box-num {
+      display: inline-block;
+      color: #FFFFFF;
+      font-size: clamp(5.5rem, 13vw, 12rem);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -3px;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      margin: 8px 0;
+    }
+
+    .crazy-we-box-num i {
       font-style: normal;
       color: #FDD31D;
       margin-left: 4px;
     }
 
-    .crazy-stat-label {
-      font-size: 1.05rem;
-      font-weight: 900;
+    .crazy-we-box-subtitle {
       color: #FDD31D;
-      letter-spacing: 1.5px;
+      font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    /* 3. MISSION SECTION */
-    .crazy-mission-section {
+    /* 3. MISSION SECTION (CrazyGames .mission) */
+    .crazy-mission {
       position: relative;
-      padding: 110px 24px 140px;
-      background: radial-gradient(circle at 50% 55%, rgba(253, 211, 29, 0.08) 0%, #0c0d13 70%);
+      background: radial-gradient(circle at 50% 50%, rgba(253, 211, 29, 0.08) 0%, #0c0d13 70%);
+      padding: 140px 24px 150px;
+      text-align: center;
       overflow: hidden;
     }
 
-    .crazy-mission-content {
-      position: relative;
-      z-index: 3;
-      max-width: 860px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .crazy-mission-title {
-      font-family: 'Nunito', sans-serif;
-      font-size: 3.5rem;
+    .c-title {
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.05;
+      text-transform: uppercase;
       color: #FFFFFF;
       letter-spacing: -1px;
-      text-transform: uppercase;
       margin-bottom: 24px;
     }
 
-    .crazy-mission-title span {
+    .c-title span {
       color: #FDD31D;
     }
 
-    .crazy-mission-desc {
-      font-size: 1.25rem;
-      line-height: 1.85;
-      color: #E2E8F0;
-      margin-bottom: 45px;
+    .c-text {
+      font-size: clamp(1.15rem, 2vw, 1.5rem);
+      line-height: 1.65;
+      color: #CBD5E1;
+      max-width: 780px;
+      margin: 0 auto;
       font-weight: 500;
     }
 
-    .crazy-mission-pills {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 40px;
-      text-align: left;
+    /* 4. MAKE SECTION (CrazyGames .make) */
+    .crazy-make {
+      position: relative;
+      background-color: #0c0d13;
+      padding: 80px 24px 140px;
+      text-align: center;
+      overflow: hidden;
     }
 
-    .crazy-pillar-card {
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(253, 211, 29, 0.22);
-      border-radius: 16px;
-      padding: 18px 22px;
-      backdrop-filter: blur(10px);
-      transition: all 0.25s ease;
+    .crazy-make-wrapper {
+      position: relative;
+      z-index: 3;
+      max-width: 1080px;
+      margin: 0 auto;
     }
 
-    .crazy-pillar-card:hover {
-      border-color: #FDD31D;
-      background: rgba(253, 211, 29, 0.08);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(253, 211, 29, 0.12);
+    .crazy-make-boxes {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      margin: 70px auto 55px;
+      flex-wrap: wrap;
     }
 
-    .crazy-pillar-title {
-      font-size: 0.8rem;
+    .crazy-make-box {
+      flex: 1;
+      min-width: 260px;
+      text-align: center;
+      padding: 20px 15px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .crazy-make-box:hover {
+      transform: translateY(-8px);
+      border-color: rgba(253, 211, 29, 0.4);
+      background: rgba(253, 211, 29, 0.04);
+    }
+
+    .crazy-make-box-icon {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .crazy-make-box-icon img {
+      max-height: 150px;
+      width: auto;
+      max-width: 100%;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45));
+    }
+
+    .crazy-make-box-title {
+      color: #FFFFFF;
+      font-size: 1.35rem;
       font-weight: 800;
-      color: #94A3B8;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .crazy-make-box-desc {
+      color: #CBD5E1;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .crazy-cta-btn {
+      background: #FDD31D;
+      color: #0C0D13;
+      font-weight: 900;
+      font-size: 1.15rem;
+      padding: 18px 46px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s cubic-bezier(0.1, 0.8, 0.2, 1);
+      box-shadow: 0 10px 32px rgba(253, 211, 29, 0.4);
+    }
+
+    .crazy-cta-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 14px 40px rgba(253, 211, 29, 0.6);
+      background: #FBBF24;
+    }
+
+    /* 5. REASONS 3D SLIDER (CrazyGames .reasons - Exact Slider) */
+    .crazy-reasons {
+      position: relative;
+      background-color: #121008;
+      padding: 120px 24px 170px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .crazy-reasons-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(253, 211, 29, 0.12) 0%, transparent 70%);
+    }
+
+    .reasons__carousel {
+      position: relative;
+      width: 100%;
+      max-width: 1020px;
+      margin: 65px auto 0;
+      z-index: 2;
+    }
+
+    .reasons__carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 65px;
+      height: 80px;
+      z-index: 10;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+    }
+
+    .reasons__carousel-btn:hover {
+      transform: translateY(-50%) scale(1.12);
+    }
+
+    .reasons__carousel-btn--prev {
+      left: -20px;
+      background-image: url('assets/about/arrow_prev.svg');
+    }
+
+    .reasons__carousel-btn--next {
+      right: -20px;
+      background-image: url('assets/about/arrow_next.svg');
+    }
+
+    /* The Carousel Viewport and Slides */
+    .reasons-slider-track {
+      position: relative;
+      width: 100%;
+      min-height: 480px;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .reasons-slide-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 40px;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.92) translateY(25px);
+      transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reasons-slide-item.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      position: relative;
+    }
+
+    /* Tilted Parallelogram Card Backgrounds */
+    .reasons-slide-card {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 45px 50px 60px;
+      box-sizing: border-box;
+    }
+
+    .reasons-slide-card::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/about/card_bg_2.svg') center / contain no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .reasons-slide-card::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/about/card_bg_1.svg') center / contain no-repeat;
+      z-index: 2;
+      pointer-events: none;
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.45));
+    }
+
+    .reasons-card-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 720px;
+      padding-top: 10px;
+    }
+
+    .reasons__carousel-num {
+      font-size: clamp(6.5rem, 12vw, 11rem);
+      font-weight: 900;
+      line-height: 1;
+      color: #FFFFFF;
+      text-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .reasons__carousel-title {
+      font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+      font-weight: 900;
+      color: #0C0D13;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 4px;
+      margin-bottom: 14px;
     }
 
-    .crazy-pillar-val {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #FFFFFF;
+    .reasons__carousel-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      font-weight: 600;
+      color: #1E293B;
+      line-height: 1.55;
+      max-width: 650px;
+      margin: 0 auto;
     }
 
-    .crazy-mission-actions {
+    /* Carousel Pagination Bullets */
+    .reasons-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 35px;
+    }
+
+    .reasons-bullet {
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      padding: 0;
+    }
+
+    .reasons-bullet.active {
+      width: 38px;
+      background: #FDD31D;
+      box-shadow: 0 0 15px rgba(253, 211, 29, 0.5);
+    }
+
+    /* 6. FOOTER ACTIONS */
+    .crazy-footer-actions {
       display: flex;
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
+      margin-top: 50px;
     }
 
     .crazy-btn-yellow {
       background: #FDD31D;
-      color: #000000;
+      color: #0C0D13;
       font-weight: 900;
       font-size: 1rem;
       padding: 15px 32px;
@@ -1271,23 +1563,22 @@
       transform: translateY(-2px);
     }
 
-    @media (max-width: 860px) {
-      .crazy-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
+    /* Responsive Adjustments */
+    @media (max-width: 900px) {
+      .crazy-we-box {
+        margin: 0 auto !important;
+        left: 0 !important;
+        padding-bottom: 120px !important;
       }
-      .crazy-hero-title {
-        font-size: 2.15rem;
+      .crazy-path-img {
+        max-width: 200px !important;
+        opacity: 0.5;
       }
-      .crazy-stat-num {
-        font-size: 4.2rem;
+      .reasons__carousel-btn {
+        display: none;
       }
-      .crazy-mission-title {
-        font-size: 2.5rem;
-      }
-      .crazy-floating-item {
-        opacity: 0.7;
-        max-width: 110px !important;
+      .reasons-slide-card {
+        padding: 35px 25px 45px;
       }
     }
 
@@ -2597,37 +2888,49 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 4: SOBRE MI (ESTILO CRAZYGAMES AMARILLO & PNGS FLOTANTES)
+         PESTANIA 4: SOBRE MI (ESTILO CRAZYGAMES - ESCALA GIGANTE & SLIDER)
          ==================================================================== -->
     <div id="tab-about" class="tab-view">
       <div class="crazy-about-wrapper">
 
-        <!-- 1. HERO SECTION -->
-        <section class="crazy-hero-section">
-          <!-- Objetos 3D Flotantes Reemplazables (assets/about/...) -->
-          <img src="assets/about/float_plus.png" class="crazy-floating-item anim-float-1" 
-               style="left: 4%; bottom: 6%; width: 200px; max-width: 25vw;" 
-               alt="3D Floating Plus" title="Archivo reemplazable: assets/about/float_plus.png">
-          
-          <img src="assets/about/float_block.png" class="crazy-floating-item anim-float-2" 
-               style="right: 5%; top: 34%; width: 190px; max-width: 24vw;" 
-               alt="3D Floating Block" title="Archivo reemplazable: assets/about/float_block.png">
+        <!-- 1. HERO SECTION (CrazyGames .home) -->
+        <section class="crazy-hero" id="aboutHome">
+          <!-- Floating 3D Objects en Hero (reemplazables en assets/about/) -->
+          <div class="crazy-path-container">
+            <img src="assets/about/float_banana.png" 
+                 class="crazy-path-img anim-drift-1 parallax-scroll" 
+                 data-speed="0.25"
+                 style="right: -40px; top: 18%; width: 420px; max-width: 38vw;" 
+                 alt="3D Floating Banana" title="Archivo reemplazable: assets/about/float_banana.png">
 
-          <img src="assets/about/float_star.png" class="crazy-floating-item anim-float-3" 
-               style="left: 10%; top: 10%; width: 110px; max-width: 16vw; opacity: 0.75;" 
-               alt="3D Floating Star" title="Archivo reemplazable: assets/about/float_star.png">
+            <img src="assets/about/float_block.png" 
+                 class="crazy-path-img anim-drift-2 parallax-scroll" 
+                 data-speed="-0.2"
+                 style="left: -30px; bottom: 8%; width: 340px; max-width: 30vw;" 
+                 alt="3D Floating Block" title="Archivo reemplazable: assets/about/float_block.png">
 
-          <div class="crazy-hero-content">
+            <img src="assets/about/float_star.png" 
+                 class="crazy-path-img anim-drift-3 parallax-scroll" 
+                 data-speed="0.35"
+                 style="left: 12%; top: 12%; width: 160px; max-width: 18vw; opacity: 0.85;" 
+                 alt="3D Floating Star" title="Archivo reemplazable: assets/about/float_star.png">
+          </div>
+
+          <div class="crazy-hero-wrapper">
             <img src="assets/EternoDev_Logo.svg" alt="EternoDev" class="crazy-hero-logo">
             
             <h1 class="crazy-hero-title">
               Donde los videojuegos indie y el software creativo <span>cobran vida</span>.
             </h1>
 
-            <a href="#aboutStats" class="crazy-scroll-down" onclick="event.preventDefault(); document.getElementById('aboutStats').scrollIntoView({ behavior: 'smooth' });">
+            <p class="crazy-hero-desc">
+              Creando mundos interactivos en Unity, herramientas útiles para la comunidad y divulgando el desarrollo indie en YouTube.
+            </p>
+
+            <a href="#aboutWe" class="crazy-scroll-down" onclick="event.preventDefault(); document.getElementById('aboutWe').scrollIntoView({ behavior: 'smooth' });">
               <span class="crazy-scroll-text">SCROLL DOWN</span>
               <div class="crazy-scroll-arrow">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </div>
@@ -2635,119 +2938,253 @@
           </div>
         </section>
 
-        <!-- Onda de transicion a estadisticas -->
-        <svg class="crazy-wave-divider" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,32L60,42.7C120,53,240,75,360,80C480,85,600,75,720,58.7C840,43,960,21,1080,21.3C1200,21,1320,43,1380,53.3L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#17150a"/>
-        </svg>
+        <!-- Curved Divider into .we -->
+        <div class="crazy-curve-divider">
+          <img src="assets/about/curve_we.svg" alt="" aria-hidden="true">
+        </div>
 
-        <!-- 2. STATS SECTION (ESTILO CRAZYGAMES) -->
-        <section id="aboutStats" class="crazy-stats-section">
-          <!-- Objetos 3D Flotantes en Estadisticas -->
-          <img src="assets/about/float_heart.png" class="crazy-floating-item anim-float-1" 
-               style="right: 5%; top: 4%; width: 175px; max-width: 22vw;" 
-               alt="3D Floating Heart" title="Archivo reemplazable: assets/about/float_heart.png">
+        <!-- 2. STATS SECTION (CrazyGames .we - Identical Asymmetric Staggered Scale) -->
+        <section id="aboutWe" class="crazy-we">
+          <!-- Floating 3D Objects a lo largo del scroll con parallax -->
+          <div class="crazy-path-container">
+            <img src="assets/about/float_plus.png" 
+                 class="crazy-path-img anim-drift-1 parallax-scroll" 
+                 data-speed="0.28"
+                 style="left: -60px; top: -60px; width: 440px; max-width: 36vw;" 
+                 alt="3D Floating Plus" title="Archivo reemplazable: assets/about/float_plus.png">
 
-          <img src="assets/about/float_zigzag.png" class="crazy-floating-item anim-float-2" 
-               style="left: 4%; bottom: 8%; width: 195px; max-width: 24vw;" 
-               alt="3D Floating Zigzag" title="Archivo reemplazable: assets/about/float_zigzag.png">
+            <img src="assets/about/float_heart.png" 
+                 class="crazy-path-img anim-drift-2 parallax-scroll" 
+                 data-speed="-0.22"
+                 style="right: -50px; top: 220px; width: 400px; max-width: 34vw;" 
+                 alt="3D Floating Heart" title="Archivo reemplazable: assets/about/float_heart.png">
 
-          <img src="assets/about/float_banana.png" class="crazy-floating-item anim-float-slow" 
-               style="right: 4%; bottom: 12%; width: 155px; max-width: 20vw;" 
-               alt="3D Floating Banana" title="Archivo reemplazable: assets/about/float_banana.png">
+            <img src="assets/about/float_zigzag.png" 
+                 class="crazy-path-img anim-drift-3 parallax-scroll" 
+                 data-speed="0.32"
+                 style="left: -80px; top: 680px; width: 510px; max-width: 40vw;" 
+                 alt="3D Floating Zigzag" title="Archivo reemplazable: assets/about/float_zigzag.png">
 
-          <div class="crazy-stats-grid">
-            <!-- Box 1 -->
-            <div class="crazy-stat-card">
-              <p class="crazy-stat-intro">Desarrollador independiente de</p>
-              <p class="crazy-stat-num"><span>6</span><i>+</i></p>
-              <p class="crazy-stat-label">VIDEOJUEGOS INDIE</p>
+            <img src="assets/about/float_pillar.png" 
+                 class="crazy-path-img anim-drift-1 parallax-scroll" 
+                 data-speed="-0.25"
+                 style="right: -40px; top: 1120px; width: 450px; max-width: 36vw;" 
+                 alt="3D Floating Pillar" title="Archivo reemplazable: assets/about/float_pillar.png">
+
+            <img src="assets/about/float_banana.png" 
+                 class="crazy-path-img anim-drift-2 parallax-scroll" 
+                 data-speed="0.2"
+                 style="left: -50px; top: 1540px; width: 420px; max-width: 34vw;" 
+                 alt="3D Floating Banana" title="Archivo reemplazable: assets/about/float_banana.png">
+          </div>
+
+          <div class="crazy-we-box-wrapper">
+            <!-- Box 1 (Left Aligned) -->
+            <div class="crazy-we-box crazy-we-box-1">
+              <p class="crazy-we-box-title">Desarrollador independiente de</p>
+              <p class="crazy-we-box-num"><span class="crazy-counter-val" data-target="10">0</span><i>+</i></p>
+              <p class="crazy-we-box-subtitle">JUEGOS CREADOS</p>
             </div>
 
-            <!-- Box 2 -->
-            <div class="crazy-stat-card">
-              <p class="crazy-stat-intro">... creados para más de</p>
-              <p class="crazy-stat-num"><span id="webVisitCounter">1.4K</span><i>+</i></p>
-              <p class="crazy-stat-label">JUGADORES Y USUARIOS</p>
+            <!-- Box 2 (Right Aligned) -->
+            <div class="crazy-we-box crazy-we-box-2">
+              <p class="crazy-we-box-title">... creados para más de</p>
+              <p class="crazy-we-box-num"><span class="crazy-counter-val" data-target="250">0</span><i>K+</i></p>
+              <p class="crazy-we-box-subtitle">JUGADORES ÚNICOS</p>
             </div>
 
-            <!-- Box 3 -->
-            <div class="crazy-stat-card">
-              <p class="crazy-stat-intro">... herramientas de software como</p>
-              <p class="crazy-stat-num"><span>5</span><i>+</i></p>
-              <p class="crazy-stat-label">APLICACIONES CREATIVAS</p>
+            <!-- Box 3 (Left Aligned) -->
+            <div class="crazy-we-box crazy-we-box-3">
+              <p class="crazy-we-box-title">... con más de</p>
+              <p class="crazy-we-box-num"><span class="crazy-counter-val" data-target="1500">0</span><i>K+</i></p>
+              <p class="crazy-we-box-subtitle">PARTIDAS JUGADAS</p>
             </div>
 
-            <!-- Box 4 -->
-            <div class="crazy-stat-card">
-              <p class="crazy-stat-intro">... y una comunidad de más de</p>
-              <p class="crazy-stat-num"><span>7,000</span><i>+</i></p>
-              <p class="crazy-stat-label">SEGUIDORES EN YOUTUBE</p>
+            <!-- Box 4 (Right Aligned) -->
+            <div class="crazy-we-box crazy-we-box-4">
+              <p class="crazy-we-box-title">... y una comunidad con</p>
+              <p class="crazy-we-box-num"><span class="crazy-counter-val" data-target="100">0</span><i>%</i></p>
+              <p class="crazy-we-box-subtitle">PASIÓN INDIE</p>
             </div>
           </div>
         </section>
 
-        <!-- Onda de transicion a mision -->
-        <svg class="crazy-wave-divider" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,64L60,58.7C120,53,240,43,360,53.3C480,64,600,96,720,96C840,96,960,64,1080,48C1200,32,1320,32,1380,32L1440,32L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#0c0d13"/>
-        </svg>
+        <!-- 3. MISSION SECTION (CrazyGames .mission) -->
+        <section class="crazy-mission" id="aboutMission">
+          <div class="crazy-path-container">
+            <img src="assets/about/float_pillar.png" 
+                 class="crazy-path-img anim-drift-2 parallax-scroll" 
+                 data-speed="0.25"
+                 style="left: 4%; top: 20%; width: 280px; max-width: 24vw;" 
+                 alt="3D Pillar">
+            <img src="assets/about/float_plus.png" 
+                 class="crazy-path-img anim-drift-1 parallax-scroll" 
+                 data-speed="-0.3"
+                 style="right: 5%; bottom: 15%; width: 260px; max-width: 22vw;" 
+                 alt="3D Plus">
+          </div>
 
-        <!-- 3. MISSION SECTION (WE ARE ON A MISSION) -->
-        <section class="crazy-mission-section">
-          <!-- Objetos 3D Flotantes en Mision -->
-          <img src="assets/about/float_pillar.png" class="crazy-floating-item anim-float-2" 
-               style="left: 5%; top: 14%; width: 150px; max-width: 20vw;" 
-               alt="3D Floating Pillar" title="Archivo reemplazable: assets/about/float_pillar.png">
-
-          <img src="assets/about/float_plus.png" class="crazy-floating-item anim-float-1" 
-               style="right: 7%; bottom: 10%; width: 140px; max-width: 18vw; opacity: 0.85;" 
-               alt="3D Floating Plus" title="Archivo reemplazable: assets/about/float_plus.png">
-
-          <div class="crazy-mission-content">
-            <h2 class="crazy-mission-title">EN UNA <span>MISIÓN</span></h2>
-            
-            <p class="crazy-mission-desc">
+          <div style="position: relative; z-index: 3; max-width: 860px; margin: 0 auto;">
+            <h2 class="c-title">EN UNA<br><span>MISIÓN</span></h2>
+            <p class="c-text">
               El navegador y los motores de desarrollo son más potentes que nunca. Como desarrollador independiente, mi misión es desbloquear el máximo potencial de cada idea, creando videojuegos memorables y herramientas prácticas para creadores y jugadores de todo el mundo.
             </p>
+          </div>
+        </section>
 
-            <!-- Pilares Clave -->
-            <div class="crazy-mission-pills">
-              <div class="crazy-pillar-card">
-                <div class="crazy-pillar-title">Motor Principal</div>
-                <div class="crazy-pillar-val">Unity (C#) & WebGL</div>
+        <!-- 4. MAKE SECTION (CrazyGames .make - 3 Large Cards) -->
+        <section class="crazy-make" id="aboutMake">
+          <div class="crazy-make-wrapper">
+            <h2 class="c-title">HAZ BRILLAR<br><span>CADA JUEGO</span></h2>
+            <p class="c-text">
+              El desarrollo de videojuegos y herramientas cambia a gran velocidad. Mi meta es estar a la vanguardia ofreciendo experiencias de juego dinámicas, accesibles y de calidad.
+            </p>
+
+            <div class="crazy-make-boxes">
+              <div class="crazy-make-box">
+                <div class="crazy-make-box-icon">
+                  <img src="assets/about/float_banana.png" alt="Gameplay Indie">
+                </div>
+                <h3 class="crazy-make-box-title">GAMEPLAY INDIE</h3>
+                <p class="crazy-make-box-desc">Juegos accesibles directamente en navegador y PC, diseñados para divertir y retar desde la primera partida.</p>
               </div>
 
-              <div class="crazy-pillar-card">
-                <div class="crazy-pillar-title">Formación Académica</div>
-                <div class="crazy-pillar-val">Ingeniería Multimedia</div>
+              <div class="crazy-make-box">
+                <div class="crazy-make-box-icon">
+                  <img src="assets/about/float_block.png" alt="Herramientas & Web">
+                </div>
+                <h3 class="crazy-make-box-title">SOFTWARE & WEB</h3>
+                <p class="crazy-make-box-desc">Herramientas prácticas, utilidades de audio y generadores pensados para agilizar la producción de contenido.</p>
               </div>
 
-              <div class="crazy-pillar-card">
-                <div class="crazy-pillar-title">Filosofía de Trabajo</div>
-                <div class="crazy-pillar-val">Desarrollo Independiente</div>
-              </div>
-
-              <div class="crazy-pillar-card">
-                <div class="crazy-pillar-title">Meta de la Comunidad</div>
-                <div class="crazy-pillar-val">7.000 Subs (Apertura Discord)</div>
+              <div class="crazy-make-box">
+                <div class="crazy-make-box-icon">
+                  <img src="assets/about/float_heart.png" alt="Devlogs & Comunidad">
+                </div>
+                <h3 class="crazy-make-box-title">DEVLOGS & COMUNIDAD</h3>
+                <p class="crazy-make-box-desc">Compartiendo el viaje real en YouTube: GameJams de 48 horas sin dormir, código abierto y crecimiento continuo.</p>
               </div>
             </div>
 
-            <!-- Botones de Accion -->
-            <div class="crazy-mission-actions">
-              <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="crazy-btn-yellow">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                Ver Devlogs en YouTube &rarr;
-              </a>
-
-              <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="crazy-btn-dark">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                Juegos en Itch.io &rarr;
-              </a>
-
-              <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="crazy-btn-dark">
-                GitHub Proyectos &rarr;
+            <div style="text-align: center; margin-top: 45px;">
+              <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="crazy-cta-btn">
+                <span>¡Explorar juegos en Itch.io! &rarr;</span>
               </a>
             </div>
+          </div>
+        </section>
+
+        <!-- 5. REASONS 3D SLIDER SECTION (CrazyGames .reasons - Exact Tilted Slider) -->
+        <section class="crazy-reasons" id="aboutReasons">
+          <div class="crazy-reasons-bg"></div>
+
+          <div style="position: relative; z-index: 3; max-width: 900px; margin: 0 auto;">
+            <h2 class="c-title">5 RAZONES<br><span>PARA SEGUIRME</span></h2>
+            <p class="c-text">
+              Un vistazo a los principios que impulsan cada proyecto, videojuego y línea de código en EternoDev:
+            </p>
+          </div>
+
+          <div class="reasons__carousel">
+            <!-- Botones Prev / Next con SVG idénticos a CrazyGames -->
+            <button class="reasons__carousel-btn reasons__carousel-btn--prev" id="reasonsPrev" aria-label="Slide anterior" onclick="moveReasonsSlide(-1)"></button>
+            <button class="reasons__carousel-btn reasons__carousel-btn--next" id="reasonsNext" aria-label="Siguiente slide" onclick="moveReasonsSlide(1)"></button>
+
+            <!-- Track del Slider -->
+            <div class="reasons-slider-track" id="reasonsTrack">
+              
+              <!-- Slide 1 -->
+              <div class="reasons-slide-item active" data-index="0">
+                <div class="reasons-slide-card">
+                  <div class="reasons-card-content">
+                    <div class="reasons__carousel-num">1</div>
+                    <h3 class="reasons__carousel-title">PASIÓN POR EL GAME DESIGN</h3>
+                    <p class="reasons__carousel-desc">
+                      Desarrollo videojuegos porque me apasiona crear mecánicas adictivas, controles precisos y universos originales que sorprendan al jugador desde el primer segundo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="reasons-slide-item" data-index="1">
+                <div class="reasons-slide-card">
+                  <div class="reasons-card-content">
+                    <div class="reasons__carousel-num">2</div>
+                    <h3 class="reasons__carousel-title">DESARROLLO ÁGIL EN UNITY</h3>
+                    <p class="reasons__carousel-desc">
+                      Iteración constante, físicas pulidas y optimización en C# para que cada juego funcione suave tanto en navegadores WebGL como en ejecutables de escritorio.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="reasons-slide-item" data-index="2">
+                <div class="reasons-slide-card">
+                  <div class="reasons-card-content">
+                    <div class="reasons__carousel-num">3</div>
+                    <h3 class="reasons__carousel-title">HERRAMIENTAS CREATIVAS</h3>
+                    <p class="reasons__carousel-desc">
+                      No me limito a los juegos: construyo utilidades prácticas, software de audio y generadores web interactivos para aportar valor y herramientas a otros creadores.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4 -->
+              <div class="reasons-slide-item" data-index="3">
+                <div class="reasons-slide-card">
+                  <div class="reasons-card-content">
+                    <div class="reasons__carousel-num">4</div>
+                    <h3 class="reasons__carousel-title">DEVLOGS HONESTOS Y TRANSPARENTES</h3>
+                    <p class="reasons__carousel-desc">
+                      En YouTube muestro el viaje real del desarrollador independiente: retos de GameJams en 48 horas sin dormir, errores cómicos y cómo superar cada obstáculo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 5 -->
+              <div class="reasons-slide-item" data-index="4">
+                <div class="reasons-slide-card">
+                  <div class="reasons-card-content">
+                    <div class="reasons__carousel-num">5</div>
+                    <h3 class="reasons__carousel-title">COMUNIDAD INDIE EN CRECIMIENTO</h3>
+                    <p class="reasons__carousel-desc">
+                      Escuchar el feedback de los jugadores es vital. Cada opinión en Itch.io y comentario en redes ayuda a pulir y llevar cada proyecto al siguiente nivel.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Paginación de bolitas (Pills) -->
+            <div class="reasons-pagination" id="reasonsPagination">
+              <button class="reasons-bullet active" onclick="goToReasonsSlide(0)" aria-label="Ir a slide 1"></button>
+              <button class="reasons-bullet" onclick="goToReasonsSlide(1)" aria-label="Ir a slide 2"></button>
+              <button class="reasons-bullet" onclick="goToReasonsSlide(2)" aria-label="Ir a slide 3"></button>
+              <button class="reasons-bullet" onclick="goToReasonsSlide(3)" aria-label="Ir a slide 4"></button>
+              <button class="reasons-bullet" onclick="goToReasonsSlide(4)" aria-label="Ir a slide 5"></button>
+            </div>
+          </div>
+
+          <!-- 6. Enlaces y Redes Destacadas -->
+          <div class="crazy-footer-actions">
+            <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="crazy-btn-yellow">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              Ver Devlogs en YouTube &rarr;
+            </a>
+
+            <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="crazy-btn-dark">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              Juegos en Itch.io &rarr;
+            </a>
+
+            <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="crazy-btn-dark">
+              GitHub Proyectos &rarr;
+            </a>
           </div>
         </section>
 
