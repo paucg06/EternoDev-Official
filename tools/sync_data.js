@@ -204,7 +204,7 @@ async function syncYouTubeVideos() {
           raw_video_count: parseInt(chanStats.videoCount || 4, 10),
           view_count: formatCount(chanStats.viewCount || 568),
           raw_view_count: parseInt(chanStats.viewCount || 568, 10),
-          avatar_url: chanSnippet.thumbnails?.medium?.url || 'src/img/icon.png',
+          avatar_url: chanSnippet.thumbnails?.medium?.url || 'src/img/logos/icon.png',
           url: "https://www.youtube.com/@eternodev"
         };
         saveJsonFile('channel.json', channelData);

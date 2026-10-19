@@ -115,7 +115,7 @@ function renderSavedModalContent() {
     html += `
       <div class="saved-item-row">
         <div class="saved-item-left">
-          <img src="${item.cover_url || 'src/img/icon.png'}" alt="${item.title}" class="saved-item-thumb" />
+          <img src="${item.cover_url || 'src/img/logos/icon.png'}" alt="${item.title}" class="saved-item-thumb" />
           <div class="saved-item-info">
             <span class="saved-item-title">${item.title}</span>
             <span class="saved-item-badge" style="color: ${badgeColor};">${badgeText}</span>
@@ -968,3 +968,12 @@ window.addEventListener('resize', () => {
   initGamesCarousel();
   initVideosCarousel();
 });
+
+// Manejador SPA para pagina 404 en GitHub Pages
+if (typeof window !== 'undefined' && document.body && document.body.classList.contains('page-404')) {
+  const spaPath = window.location.pathname.replace(/^\/+|\/+$/g, '');
+  if (spaPath && spaPath !== '404' && spaPath !== '404.html') {
+    sessionStorage.setItem('spa_redirect', spaPath);
+    window.location.replace('/');
+  }
+}
