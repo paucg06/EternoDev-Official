@@ -761,9 +761,27 @@ function filterAppsList() {
   });
 }
 
+function filterHomeSearch() {
+  const input = document.getElementById('homeSearchInput');
+  const query = (input ? input.value : '').toLowerCase().trim();
+
+  const homeGameCards = document.querySelectorAll('#carouselTrackHome .game-card-item');
+  homeGameCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!query || text.includes(query)) ? '' : 'none';
+  });
+
+  const homeVideoCards = document.querySelectorAll('#videoTrackHome .video-card-item');
+  homeVideoCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!query || text.includes(query)) ? '' : 'none';
+  });
+}
+
 window.setGameFilter = setGameFilter;
 window.filterGamesList = filterGamesList;
 window.filterAppsList = filterAppsList;
+window.filterHomeSearch = filterHomeSearch;
 
 function createGameCard(g, showBookmark = true) {
   const slug = (g.url || '').split('/').filter(Boolean).pop();

@@ -2444,7 +2444,6 @@
       <!-- Hero Section -->
       <section class="hero-section">
         <div class="container hero-container">
-          <div class="hero-studio-badge">Estudio Indie Independiente</div>
           <h1 class="hero-title">
             Desarrolla, publica y juega. Videojuegos y herramientas.
           </h1>
@@ -2464,8 +2463,16 @@
         </div>
       </section>
 
+      <!-- Barra de Busqueda Independiente en Home -->
+      <div class="filter-search-bar" style="margin: 0 auto 30px; max-width: 680px; padding: 0 24px;">
+        <div class="search-input-wrap">
+          <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="homeSearchInput" class="search-input-field" placeholder="Buscar videojuegos, aplicaciones o vídeos..." oninput="filterHomeSearch()" />
+        </div>
+      </div>
+
       <!-- Resumen Home: Juegos en Itch.io -->
-      <section class="carousel-section" style="padding-top: 20px;">
+      <section class="carousel-section" style="padding-top: 10px;">
         <div class="container">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
             <h2 style="font-size: 1.95rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -2734,20 +2741,6 @@
             <p style="color: #CCCCCE; font-size: 1.05rem;">Videojuegos indie creados en Unity. Jugables directamente en el navegador o descargables para PC.</p>
           </div>
 
-          <!-- Barra de Busqueda y Filtros de Juegos -->
-          <div class="filter-search-bar">
-            <div class="search-input-wrap">
-              <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input type="text" id="gameSearchInput" class="search-input-field" placeholder="Buscar juego por titulo o genero..." oninput="filterGamesList()" />
-            </div>
-            <div class="filter-pills-row">
-              <button class="filter-pill-btn active" data-filter="all" onclick="setGameFilter('all', this)">Todos</button>
-              <button class="filter-pill-btn" data-filter="browser" onclick="setGameFilter('browser', this)">Navegador</button>
-              <button class="filter-pill-btn" data-filter="windows" onclick="setGameFilter('windows', this)">Windows</button>
-              <button class="filter-pill-btn" data-filter="linux" onclick="setGameFilter('linux', this)">Linux</button>
-            </div>
-          </div>
-
           <div class="carousel-viewport">
             <div class="carousel-track" id="carouselTrack">
               <!-- Fallback Games -->
@@ -2871,18 +2864,6 @@
     <div id="tab-apps" class="tab-view">
       <section class="apps-section" style="padding-top: 50px;">
         <div class="container">
-          <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
-            <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones & Software</h2>
-            <p style="color: #CCCCCE; font-size: 1.05rem;">Herramientas web instantáneas y software de escritorio para creadores y usuarios.</p>
-          </div>
-
-          <!-- Barra de Busqueda de Apps -->
-          <div class="filter-search-bar">
-            <div class="search-input-wrap">
-              <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input type="text" id="appSearchInput" class="search-input-field" placeholder="Buscar software o herramienta..." oninput="filterAppsList()" />
-            </div>
-          </div>
 
           <!-- Subcategoría 1: Aplicaciones Web -->
           <div class="app-subcat-header">
@@ -3361,151 +3342,6 @@
               El desarrollo de videojuegos y herramientas cambia a gran velocidad. Mi meta es estar a la vanguardia ofreciendo experiencias de juego dinámicas, accesibles y de calidad.
             </p>
 
-            <div class="crazy-make-boxes">
-              <div class="crazy-make-box">
-                <div class="crazy-make-box-icon">
-                  <img src="assets/about/float_banana.png" alt="Gameplay Indie">
-                </div>
-                <h3 class="crazy-make-box-title">GAMEPLAY INDIE</h3>
-                <p class="crazy-make-box-desc">Juegos accesibles directamente en navegador y PC, diseñados para divertir y retar desde la primera partida.</p>
-              </div>
-
-              <div class="crazy-make-box">
-                <div class="crazy-make-box-icon">
-                  <img src="assets/about/float_block.png" alt="Herramientas & Web">
-                </div>
-                <h3 class="crazy-make-box-title">SOFTWARE & WEB</h3>
-                <p class="crazy-make-box-desc">Herramientas prácticas, utilidades de audio y generadores pensados para agilizar la producción de contenido.</p>
-              </div>
-
-              <div class="crazy-make-box">
-                <div class="crazy-make-box-icon">
-                  <img src="assets/about/float_heart.png" alt="Devlogs & Comunidad">
-                </div>
-                <h3 class="crazy-make-box-title">DEVLOGS & COMUNIDAD</h3>
-                <p class="crazy-make-box-desc">Compartiendo el viaje real en YouTube: GameJams de 48 horas sin dormir, código abierto y crecimiento continuo.</p>
-              </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 45px;">
-              <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="crazy-cta-btn">
-                <span>¡Explorar juegos en Itch.io! &rarr;</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- 5. REASONS 3D SLIDER SECTION (CrazyGames .reasons - Exact Tilted Slider) -->
-        <section class="crazy-reasons" id="aboutReasons">
-          <div class="crazy-reasons-bg"></div>
-
-          <div style="position: relative; z-index: 3; max-width: 900px; margin: 0 auto;">
-            <h2 class="c-title">5 RAZONES<br><span>PARA SEGUIRME</span></h2>
-            <p class="c-text">
-              Un vistazo a los principios que impulsan cada proyecto, videojuego y línea de código en EternoDev:
-            </p>
-          </div>
-
-          <div class="reasons__carousel">
-            <!-- Botones Prev / Next con SVG idénticos a CrazyGames -->
-            <button class="reasons__carousel-btn reasons__carousel-btn--prev" id="reasonsPrev" aria-label="Slide anterior" onclick="moveReasonsSlide(-1)"></button>
-            <button class="reasons__carousel-btn reasons__carousel-btn--next" id="reasonsNext" aria-label="Siguiente slide" onclick="moveReasonsSlide(1)"></button>
-
-            <!-- Track del Slider -->
-            <div class="reasons-slider-track" id="reasonsTrack">
-              
-              <!-- Slide 1 -->
-              <div class="reasons-slide-item active" data-index="0">
-                <div class="reasons-slide-card">
-                  <div class="reasons-card-content">
-                    <div class="reasons__carousel-num">1</div>
-                    <h3 class="reasons__carousel-title">PASIÓN POR EL GAME DESIGN</h3>
-                    <p class="reasons__carousel-desc">
-                      Desarrollo videojuegos porque me apasiona crear mecánicas adictivas, controles precisos y universos originales que sorprendan al jugador desde el primer segundo.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 2 -->
-              <div class="reasons-slide-item" data-index="1">
-                <div class="reasons-slide-card">
-                  <div class="reasons-card-content">
-                    <div class="reasons__carousel-num">2</div>
-                    <h3 class="reasons__carousel-title">DESARROLLO ÁGIL EN UNITY</h3>
-                    <p class="reasons__carousel-desc">
-                      Iteración constante, físicas pulidas y optimización en C# para que cada juego funcione suave tanto en navegadores WebGL como en ejecutables de escritorio.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 3 -->
-              <div class="reasons-slide-item" data-index="2">
-                <div class="reasons-slide-card">
-                  <div class="reasons-card-content">
-                    <div class="reasons__carousel-num">3</div>
-                    <h3 class="reasons__carousel-title">HERRAMIENTAS CREATIVAS</h3>
-                    <p class="reasons__carousel-desc">
-                      No me limito a los juegos: construyo utilidades prácticas, software de audio y generadores web interactivos para aportar valor y herramientas a otros creadores.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 4 -->
-              <div class="reasons-slide-item" data-index="3">
-                <div class="reasons-slide-card">
-                  <div class="reasons-card-content">
-                    <div class="reasons__carousel-num">4</div>
-                    <h3 class="reasons__carousel-title">DEVLOGS HONESTOS Y TRANSPARENTES</h3>
-                    <p class="reasons__carousel-desc">
-                      En YouTube muestro el viaje real del desarrollador independiente: retos de GameJams en 48 horas sin dormir, errores cómicos y cómo superar cada obstáculo.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Slide 5 -->
-              <div class="reasons-slide-item" data-index="4">
-                <div class="reasons-slide-card">
-                  <div class="reasons-card-content">
-                    <div class="reasons__carousel-num">5</div>
-                    <h3 class="reasons__carousel-title">COMUNIDAD INDIE EN CRECIMIENTO</h3>
-                    <p class="reasons__carousel-desc">
-                      Escuchar el feedback de los jugadores es vital. Cada opinión en Itch.io y comentario en redes ayuda a pulir y llevar cada proyecto al siguiente nivel.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Paginación de bolitas (Pills) -->
-            <div class="reasons-pagination" id="reasonsPagination">
-              <button class="reasons-bullet active" onclick="goToReasonsSlide(0)" aria-label="Ir a slide 1"></button>
-              <button class="reasons-bullet" onclick="goToReasonsSlide(1)" aria-label="Ir a slide 2"></button>
-              <button class="reasons-bullet" onclick="goToReasonsSlide(2)" aria-label="Ir a slide 3"></button>
-              <button class="reasons-bullet" onclick="goToReasonsSlide(3)" aria-label="Ir a slide 4"></button>
-              <button class="reasons-bullet" onclick="goToReasonsSlide(4)" aria-label="Ir a slide 5"></button>
-            </div>
-          </div>
-
-          <!-- 6. Enlaces y Redes Destacadas -->
-          <div class="crazy-footer-actions">
-            <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="crazy-btn-yellow">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              Ver Devlogs en YouTube &rarr;
-            </a>
-
-            <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="crazy-btn-dark">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              Juegos en Itch.io &rarr;
-            </a>
-
-            <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="crazy-btn-dark">
-              GitHub Proyectos &rarr;
-            </a>
           </div>
         </section>
 
