@@ -3,9 +3,24 @@
 // ==========================================================================
 
 const fs = require('fs');
+const path = require('path');
 const https = require('https');
 const http = require('http');
 const { URL } = require('url');
+
+function saveJsonFile(filename, data) {
+  const jsonStr = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+  fs.writeFileSync(filename, jsonStr, 'utf-8');
+  try {
+    const srcDir = path.join('src', 'json');
+    if (!fs.existsSync(srcDir)) {
+      fs.mkdirSync(srcDir, { recursive: true });
+    }
+    fs.writeFileSync(path.join(srcDir, path.basename(filename)), jsonStr, 'utf-8');
+  } catch (err) {
+    console.warn(`Aviso al escribir en src/json/${filename}:`, err.message);
+  }
+}
 
 function fetchUrl(urlStr, options = {}, maxRedirects = 5) {
   return new Promise((resolve, reject) => {
@@ -153,7 +168,7 @@ async function syncItchGames() {
           }
 
           if (enrichedGames.length > 0) {
-            fs.writeFileSync('games.json', JSON.stringify(enrichedGames, null, 2), 'utf-8');
+            saveJsonFile('games.json', enrichedGames);
             console.log(`Itch.io API: ${enrichedGames.length} juegos públicos activos guardados en games.json`);
           } else {
             console.log("No se encontraron juegos públicos activos en Itch.io.");
@@ -194,10 +209,10 @@ async function syncYouTubeVideos() {
           raw_video_count: parseInt(chanStats.videoCount || 4, 10),
           view_count: formatCount(chanStats.viewCount || 568),
           raw_view_count: parseInt(chanStats.viewCount || 568, 10),
-          avatar_url: chanSnippet.thumbnails?.medium?.url || 'assets/icon.png',
+          avatar_url: chanSnippet.thumbnails?.medium?.url || 'src/img/icon.png',
           url: "https://www.youtube.com/@eternodev"
         };
-        fs.writeFileSync('channel.json', JSON.stringify(channelData, null, 2), 'utf-8');
+        saveJsonFile('channel.json', channelData);
         console.log(`YouTube Data API: Estadísticas del canal guardadas en channel.json (${channelData.subscribers} subs, ${channelData.video_count} vídeos)`);
 
         if (uploadsPlaylistId) {
@@ -235,7 +250,7 @@ async function syncYouTubeVideos() {
                 });
 
                 if (videos.length > 0) {
-                  fs.writeFileSync('videos.json', JSON.stringify(videos, null, 2), 'utf-8');
+                  saveJsonFile('videos.json', videos);
                   console.log(`YouTube Data API: ${videos.length} vídeos activos guardados en videos.json`);
                   return;
                 }
@@ -326,8 +341,8 @@ function generateAdsJson() {
       image_url: g.cover_url,
       features: [
         `Género: ${g.genre || 'Indie Game'}`,
-        g.p_browser ? "🎮 Jugable directamente en el navegador" : "💻 Descarga disponible para PC",
-        "⭐ 100% Gratuito en Itch.io"
+        g.p_browser ? "Jugable directamente en el navegador" : "Descarga disponible para PC",
+        "100% Gratuito en Itch.io"
       ]
     });
   });
@@ -362,10 +377,10 @@ function generateAdsJson() {
     fs.mkdirSync('youplanner', { recursive: true });
   }
 
-  // Guardar en youplanner/ads.json y en ads.json (raíz)
+  // Guardar en youplanner/ads.json y en ads.json (raíz y src/json)
   fs.writeFileSync('youplanner/ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
-  fs.writeFileSync('ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
-  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas en youplanner/ads.json y ads.json`);
+  saveJsonFile('ads.json', adsPayload);
+  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas en youplanner/ads.json, ads.json y src/json/ads.json`);
 }
 
 async function main() {

@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <title>EternoDev</title>
   <script>
-    // GitHub Pages SPA router: guarda la ruta y redirige a la raíz para cargar la pestaña correspondiente
+    // GitHub Pages SPA router: guarda la ruta y redirige a src/html/index.html
     var path = window.location.pathname.replace(/^\/+|\/+$/g, '');
     if (path) {
       sessionStorage.setItem('spa_redirect', path);
     }
-    window.location.replace('/');
+    window.location.replace('src/html/index.html');
   </script>
 </head>
 <body style="background:#1D1D26; color:#fff; font-family:sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">

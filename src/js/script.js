@@ -115,7 +115,7 @@ function renderSavedModalContent() {
     html += `
       <div class="saved-item-row">
         <div class="saved-item-left">
-          <img src="${item.cover_url || 'assets/icon.png'}" alt="${item.title}" class="saved-item-thumb" />
+          <img src="${item.cover_url || '../img/icon.png'}" alt="${item.title}" class="saved-item-thumb" />
           <div class="saved-item-info">
             <span class="saved-item-title">${item.title}</span>
             <span class="saved-item-badge" style="color: ${badgeColor};">${badgeText}</span>
@@ -897,9 +897,9 @@ async function loadDynamicData() {
   }
   try {
     const [channelResult, videosResult, gamesResult] = await Promise.allSettled([
-      fetch(`channel.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
-      fetch(`videos.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
-      fetch(`games.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null)
+      fetch(`../json/channel.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
+      fetch(`../json/videos.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
+      fetch(`../json/games.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null)
     ]);
 
     // Estadisticas de YouTube
