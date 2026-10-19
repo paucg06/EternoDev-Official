@@ -29,7 +29,7 @@ jobs:
         env:
           ITCH_API_KEY: ${{ secrets.ITCH_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: node scripts/sync_data.js
+        run: node tools/sync_data.js
 
       - name: Guardar cambios si hay actualizaciones
         run: |
