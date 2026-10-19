@@ -682,6 +682,16 @@
       border-radius: 4px;
       line-height: 1.3;
       letter-spacing: 0.2px;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      font-family: inherit;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .badge-play-browser:hover {
+      background: #FDD31D;
+      color: #0C0D13;
     }
 
     .itch-platform-svg {
@@ -1013,7 +1023,7 @@
       justify-content: center;
       text-align: center;
       padding: 140px 24px 60px;
-      background: radial-gradient(circle at 50% 30%, rgba(253, 211, 29, 0.14) 0%, rgba(12, 13, 19, 0.98) 75%);
+      background-color: #0C0D13;
       overflow: hidden;
     }
 
@@ -1195,7 +1205,7 @@
     /* 3. MISSION SECTION (CrazyGames .mission) */
     .crazy-mission {
       position: relative;
-      background: radial-gradient(circle at 50% 50%, rgba(253, 211, 29, 0.08) 0%, #0c0d13 70%);
+      background-color: #0C0D13;
       padding: 140px 24px 150px;
       text-align: center;
       overflow: hidden;
@@ -1328,14 +1338,7 @@
     }
 
     .crazy-reasons-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      background: radial-gradient(circle at 50% 60%, rgba(253, 211, 29, 0.12) 0%, transparent 70%);
+      display: none;
     }
 
     .reasons__carousel {
@@ -2008,6 +2011,232 @@
         gap: 12px;
       }
     }
+
+    /* Search and Filter Bars */
+    .filter-search-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 860px;
+      margin: 0 auto 30px;
+      flex-wrap: wrap;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .search-input-field {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      background-color: #14141B;
+      border: 1px solid #2E2E3A;
+      border-radius: 999px;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    .search-input-field:focus {
+      border-color: #FDD31D;
+    }
+
+    .search-input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: #8E8E93;
+      pointer-events: none;
+    }
+
+    .filter-pills-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background-color: #1A1A24;
+      border: 1px solid #2E2E3A;
+      color: #CCCCCE;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-pill-btn:hover {
+      border-color: #FDD31D;
+      color: #FFFFFF;
+    }
+
+    .filter-pill-btn.active {
+      background-color: #FDD31D;
+      border-color: #FDD31D;
+      color: #0C0D13;
+    }
+
+    /* Modal de Juego Embebido (Play in Browser) */
+    .game-play-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(12, 13, 19, 0.94);
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .game-play-modal.open {
+      display: flex;
+    }
+
+    .game-play-container {
+      width: 100%;
+      max-width: 1060px;
+      height: 88vh;
+      background-color: #14141B;
+      border: 2px solid #2E2E3A;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .game-play-header {
+      padding: 14px 20px;
+      background-color: #1A1A24;
+      border-bottom: 1px solid #2E2E3A;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .game-play-title {
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-play-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .game-play-itch-link {
+      color: #FDD31D;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .game-play-itch-link:hover {
+      text-decoration: underline;
+    }
+
+    .game-play-close-btn {
+      background: transparent;
+      border: none;
+      color: #8E8E93;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+    }
+
+    .game-play-close-btn:hover {
+      color: #FDD31D;
+    }
+
+    .game-play-iframe-wrap {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-color: #000000;
+    }
+
+    .game-play-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Barra de Navegacion Inferior Movil */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #12121A;
+      border-top: 1px solid #2A2A35;
+      z-index: 1000;
+      padding: 8px 12px 14px;
+      box-sizing: border-box;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mobile-bottom-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      color: #8E8E93;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.15s ease;
+      font-family: inherit;
+    }
+
+    .mobile-bottom-nav-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .mobile-bottom-nav-btn.active {
+      color: #FDD31D;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      body {
+        padding-bottom: 70px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2435,6 +2664,20 @@
             <p style="color: #CCCCCE; font-size: 1.05rem;">Videojuegos indie creados en Unity. Jugables directamente en el navegador o descargables para PC.</p>
           </div>
 
+          <!-- Barra de Busqueda y Filtros de Juegos -->
+          <div class="filter-search-bar">
+            <div class="search-input-wrap">
+              <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" id="gameSearchInput" class="search-input-field" placeholder="Buscar juego por titulo o genero..." oninput="filterGamesList()" />
+            </div>
+            <div class="filter-pills-row">
+              <button class="filter-pill-btn active" data-filter="all" onclick="setGameFilter('all', this)">Todos</button>
+              <button class="filter-pill-btn" data-filter="browser" onclick="setGameFilter('browser', this)">Navegador</button>
+              <button class="filter-pill-btn" data-filter="windows" onclick="setGameFilter('windows', this)">Windows</button>
+              <button class="filter-pill-btn" data-filter="linux" onclick="setGameFilter('linux', this)">Linux</button>
+            </div>
+          </div>
+
           <div class="carousel-viewport">
             <div class="carousel-track" id="carouselTrack">
               <!-- Fallback Games -->
@@ -2561,6 +2804,14 @@
           <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
             <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones & Software</h2>
             <p style="color: #CCCCCE; font-size: 1.05rem;">Herramientas web instantáneas y software de escritorio para creadores y usuarios.</p>
+          </div>
+
+          <!-- Barra de Busqueda de Apps -->
+          <div class="filter-search-bar">
+            <div class="search-input-wrap">
+              <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" id="appSearchInput" class="search-input-field" placeholder="Buscar software o herramienta..." oninput="filterAppsList()" />
+            </div>
           </div>
 
           <!-- Subcategoría 1: Aplicaciones Web -->
@@ -3237,7 +3488,7 @@
               <p class="comm-desc">Paneles visuales y resenias de manhwas recomendados.</p>
             </a>
 
-            <a href="https://buymeacoffee.com/eternodev" target="_blank" rel="noopener" class="community-link-card" style="border-color: rgba(251, 191, 36, 0.45); background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(42, 42, 53, 1) 100%);">
+            <a href="https://buymeacoffee.com/eternodev" target="_blank" rel="noopener" class="community-link-card" style="border-color: #FDD31D; background: #22222C;">
               <div class="comm-title" style="color: #FBBF24;">Buy Me a Plátano</div>
               <div class="comm-handle" style="color: #FDE68A;">buymeacoffee.com/eternodev</div>
               <p class="comm-desc">Apoya el desarrollo de videojuegos independientes y herramientas de software libre invitándome a un plátano.</p>
@@ -3337,7 +3588,45 @@
         </a>
       </div>
     </div>
+  <!-- Modal para Jugar en Navegador (Play in Browser) -->
+  <div id="gamePlayModal" class="game-play-modal" onclick="if(event.target === this) closeGamePlayModal()">
+    <div class="game-play-container">
+      <div class="game-play-header">
+        <h3 class="game-play-title" id="gamePlayModalTitle">Jugar en Navegador</h3>
+        <div class="game-play-actions">
+          <a id="gamePlayItchLink" href="#" target="_blank" rel="noopener" class="game-play-itch-link">Abrir en Itch.io &rarr;</a>
+          <button class="game-play-close-btn" onclick="closeGamePlayModal()" title="Cerrar juego">&times;</button>
+        </div>
+      </div>
+      <div class="game-play-iframe-wrap">
+        <iframe id="gamePlayIframe" class="game-play-iframe" src="" allowfullscreen allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated"></iframe>
+      </div>
+    </div>
   </div>
+
+  <!-- Barra de Navegación Inferior Fija para Móviles (Thumb-friendly) -->
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-bottom-nav-btn active" data-target="home" onclick="switchTab('home')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="mobile-bottom-nav-btn" data-target="games" onclick="switchTab('games')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 5H5.5C3 5 1 7 1 9.5v5C1 16.9 2.9 18.8 5.2 18.9c1.3.1 2.5-.5 3.3-1.6l.8-1.3h5.4l.8 1.3c.8 1.1 2 1.7 3.3 1.6C21.1 18.8 23 16.9 23 14.5v-5C23 7 21 5 18.5 5zM7.5 13H6.2v1.3c0 .4-.3.7-.7.7s-.7-.3-.7-.7V13H3.5c-.4 0-.7-.3-.7-.7s.3-.7.7-.7h1.3v-1.3c0-.4.3-.7.7-.7s.7.3.7.7v1.3h1.3c.4 0 .7.3.7.7s-.3.7-.7.7zm9-1.5c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2zm2.5 2.5c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2z"/></svg>
+      <span>Juegos</span>
+    </button>
+    <button class="mobile-bottom-nav-btn" data-target="apps" onclick="switchTab('apps')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+      <span>Apps</span>
+    </button>
+    <button class="mobile-bottom-nav-btn" data-target="videos" onclick="switchTab('videos')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-10 12.5v-9l7 4.5-7 4.5z"/></svg>
+      <span>Vídeos</span>
+    </button>
+    <button class="mobile-bottom-nav-btn" data-target="about" onclick="switchTab('about')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      <span>Sobre Mí</span>
+    </button>
+  </nav>
 
   <script src="script.js"></script>
 </body>

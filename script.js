@@ -326,6 +326,41 @@ window.closeSavedModal = closeSavedModal;
 window.openNotifModal = openNotifModal;
 window.closeNotifModal = closeNotifModal;
 
+// Modal para Jugar en Navegador
+function openGamePlayModal(url, title, itchUrl) {
+  const modal = document.getElementById('gamePlayModal');
+  const iframe = document.getElementById('gamePlayIframe');
+  const titleEl = document.getElementById('gamePlayModalTitle');
+  const itchLink = document.getElementById('gamePlayItchLink');
+  if (!modal || !iframe) return;
+
+  if (titleEl) titleEl.textContent = title || 'Jugar en Navegador';
+  if (itchLink) itchLink.href = itchUrl || url;
+  iframe.src = url;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGamePlayModal() {
+  const modal = document.getElementById('gamePlayModal');
+  const iframe = document.getElementById('gamePlayIframe');
+  if (iframe) iframe.src = '';
+  if (modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+window.openGamePlayModal = openGamePlayModal;
+window.closeGamePlayModal = closeGamePlayModal;
+
+// Manejo de la tecla Escape para cerrar cualquier modal abierto
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeGamePlayModal();
+    closeSavedModal();
+    closeNotifModal();
+  }
+});
+
 // Toggle del Menú Hamburguesa Móvil
 function toggleMobileMenu() {
   const dropdown = document.getElementById('mobileNavDropdown');
@@ -370,6 +405,11 @@ function switchTab(tabId, updateUrl = true) {
   });
 
   mobileButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-target') === tabId);
+  });
+
+  const mobileBottomButtons = document.querySelectorAll('.mobile-bottom-nav-btn');
+  mobileBottomButtons.forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-target') === tabId);
   });
 
@@ -578,6 +618,153 @@ function initVideosCarousel() {
   updateVideoCarousel();
 }
 
+const DEFAULT_FALLBACK_GAMES = [
+  {
+    id: 3533624,
+    title: "CastleCat RPG",
+    url: "https://eternodev.itch.io/castlecat-rpg",
+    cover_url: "https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png",
+    short_text: "¡Naciste gato, pero morirás como leyenda!",
+    type: "html",
+    p_windows: false,
+    p_linux: true,
+    p_osx: false,
+    genre: "Adventure",
+    p_browser: true
+  },
+  {
+    id: 4244918,
+    title: "Oonga Bunga!",
+    url: "https://eternodev.itch.io/oonga-bunga",
+    cover_url: "https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png",
+    short_text: "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
+    type: "default",
+    p_windows: true,
+    p_linux: true,
+    p_osx: false,
+    genre: "Fighting",
+    p_browser: false
+  },
+  {
+    id: 3269482,
+    title: "Soap Dodger",
+    url: "https://eternodev.itch.io/soap-dodger",
+    cover_url: "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
+    short_text: "Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!",
+    type: "html",
+    p_windows: true,
+    p_linux: true,
+    p_osx: true,
+    genre: "Action",
+    p_browser: true
+  },
+  {
+    id: 4692794,
+    title: "Space Blitz",
+    url: "https://eternodev.itch.io/space-blitz",
+    cover_url: "https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png",
+    short_text: "Un trepidante shooter arcade donde tu nave evoluciona con mejoras visuales dinámicas.",
+    type: "html",
+    p_windows: false,
+    p_linux: false,
+    p_osx: false,
+    genre: "Shooter",
+    p_browser: true
+  },
+  {
+    id: 3974299,
+    title: "Verdades Incompletas",
+    url: "https://eternodev.itch.io/verdades-incompletas",
+    cover_url: "https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png",
+    short_text: "Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.",
+    type: "html",
+    p_windows: true,
+    p_linux: true,
+    p_osx: true,
+    genre: "Visual Novel",
+    p_browser: true
+  }
+];
+
+let allLoadedGames = [...DEFAULT_FALLBACK_GAMES];
+let currentGameFilter = 'all';
+let currentGameSearch = '';
+
+function setGameFilter(filter, btn) {
+  currentGameFilter = filter;
+  document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderFilteredGames();
+}
+
+function filterGamesList() {
+  const input = document.getElementById('gameSearchInput');
+  currentGameSearch = (input ? input.value : '').toLowerCase().trim();
+  renderFilteredGames();
+}
+
+function renderFilteredGames() {
+  const gTrack = document.getElementById('carouselTrack');
+  if (!gTrack) return;
+
+  const filtered = allLoadedGames.filter(g => {
+    const slug = (g.url || '').split('/').filter(Boolean).pop();
+    const known = KNOWN_GAME_METADATA[slug] || {};
+    const isBrowser = g.p_browser || (g.type === 'html') || known.p_browser;
+    const isWin = g.p_windows || known.p_windows;
+    const isLin = g.p_linux || known.p_linux;
+    const genre = (g.genre || known.genre || '').toLowerCase();
+    const title = (g.title || '').toLowerCase();
+    const desc = (g.desc || g.short_text || '').toLowerCase();
+
+    if (currentGameFilter === 'browser' && !isBrowser) return false;
+    if (currentGameFilter === 'windows' && !isWin) return false;
+    if (currentGameFilter === 'linux' && !isLin) return false;
+
+    if (currentGameSearch) {
+      const match = title.includes(currentGameSearch) ||
+                    genre.includes(currentGameSearch) ||
+                    desc.includes(currentGameSearch);
+      if (!match) return false;
+    }
+    return true;
+  });
+
+  gTrack.innerHTML = '';
+  if (filtered.length === 0) {
+    gTrack.innerHTML = `
+      <div style="grid-column: 1 / -1; width: 100%; text-align: center; padding: 48px 16px; color: #8E8E93;">
+        <p style="font-size: 1.05rem; font-weight: 700; color: #CCCCCE; margin-bottom: 6px;">No se encontraron videojuegos</p>
+        <p style="font-size: 0.88rem; max-width: 380px; margin: 0 auto; line-height: 1.5;">Prueba con otro término de búsqueda o selecciona la categoría 'Todos'.</p>
+      </div>
+    `;
+  } else {
+    filtered.forEach(g => {
+      gTrack.appendChild(createGameCard(g, true));
+    });
+  }
+
+  currentGameIndex = 0;
+  initGamesCarousel();
+  updateAllBookmarkButtons();
+}
+
+function filterAppsList() {
+  const input = document.getElementById('appSearchInput');
+  const query = (input ? input.value : '').toLowerCase().trim();
+  const appCards = document.querySelectorAll('#tab-apps .app-box-card');
+
+  appCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const matches = !query || text.includes(query);
+    card.style.display = matches ? '' : 'none';
+  });
+}
+
+window.setGameFilter = setGameFilter;
+window.filterGamesList = filterGamesList;
+window.filterAppsList = filterAppsList;
+
 function createGameCard(g, showBookmark = true) {
   const slug = (g.url || '').split('/').filter(Boolean).pop();
   const known = KNOWN_GAME_METADATA[slug] || {};
@@ -588,20 +775,22 @@ function createGameCard(g, showBookmark = true) {
   const isLin = g.p_linux || known.p_linux;
   const isMac = g.p_osx || known.p_osx;
 
-  let platformsHtml = '';
-  if (isBrowser) platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
-  if (isWin) platformsHtml += PLATFORM_SVGS.windows;
-  if (isLin) platformsHtml += PLATFORM_SVGS.linux;
-  if (isMac) platformsHtml += PLATFORM_SVGS.macos;
-
   const id = g.id ? g.id.toString() : slug;
   const isSaved = isBookmarked(id);
   const escapedTitle = (g.title || '').replace(/'/g, "\\'");
   const coverUrl = g.cover_url || '';
   const gameUrl = g.url || '';
 
+  let platformsHtml = '';
+  if (isBrowser) {
+    platformsHtml += `<button type="button" class="badge-play-browser" onclick="event.preventDefault(); event.stopPropagation(); openGamePlayModal('${gameUrl}', '${escapedTitle}', '${gameUrl}')" title="Jugar en el navegador">Play in browser</button>`;
+  }
+  if (isWin) platformsHtml += PLATFORM_SVGS.windows;
+  if (isLin) platformsHtml += PLATFORM_SVGS.linux;
+  if (isMac) platformsHtml += PLATFORM_SVGS.macos;
+
   const bookmarkBtnHtml = showBookmark ? `
-      <button class="game-bookmark-overlay-btn ${isSaved ? 'is-bookmarked' : ''}" data-bookmark-id="${id}" onclick="toggleBookmark(event, { id: '${id}', type: 'game', title: '${escapedTitle}', url: '${gameUrl}', cover_url: '${coverUrl}', badge: '${genre}' })" title="${isSaved ? 'Quitar de guardados' : 'Guardar juego'}">
+      <button type="button" class="game-bookmark-overlay-btn ${isSaved ? 'is-bookmarked' : ''}" data-bookmark-id="${id}" onclick="toggleBookmark(event, { id: '${id}', type: 'game', title: '${escapedTitle}', url: '${gameUrl}', cover_url: '${coverUrl}', badge: '${genre}' })" title="${isSaved ? 'Quitar de guardados' : 'Guardar juego'}">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
       </button>` : '';
 
@@ -681,86 +870,74 @@ function createVideoCard(v) {
   return card;
 }
 
-// 3. Cargar datos sincronizados por GitHub Actions si existen
+// 3. Cargar datos concurrentemente con Promise.allSettled
 async function loadDynamicData() {
   try {
-    // 0) Cargar estadísticas del canal de YouTube (suscriptores y total de vídeos)
-    try {
-      const cRes = await fetch(`channel.json?_t=${Date.now()}`);
-      if (cRes.ok) {
-        const chan = await cRes.json();
-        const subEls = document.querySelectorAll('.yt-dynamic-subs');
-        const vidEls = document.querySelectorAll('.yt-dynamic-vids');
-        if (chan.subscribers) {
-          subEls.forEach(el => el.textContent = `${chan.subscribers} suscriptores`);
-        }
-        if (chan.video_count) {
-          vidEls.forEach(el => el.textContent = `${chan.video_count} vídeos`);
-        }
+    const [channelResult, videosResult, gamesResult] = await Promise.allSettled([
+      fetch(`channel.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
+      fetch(`videos.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
+      fetch(`games.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null)
+    ]);
+
+    // Estadisticas de YouTube
+    if (channelResult.status === 'fulfilled' && channelResult.value) {
+      const chan = channelResult.value;
+      const subEls = document.querySelectorAll('.yt-dynamic-subs');
+      const vidEls = document.querySelectorAll('.yt-dynamic-vids');
+      if (chan.subscribers) {
+        subEls.forEach(el => el.textContent = `${chan.subscribers} suscriptores`);
       }
-    } catch (_) {}
-
-    // A) Cargar videos desde videos.json
-    const vRes = await fetch(`videos.json?_t=${Date.now()}`);
-    if (vRes.ok) {
-      const videos = await vRes.json();
-      if (Array.isArray(videos) && videos.length > 0) {
-        const vTrack = document.getElementById('videoTrack');
-        const vTrackHome = document.getElementById('videoTrackHome');
-
-        if (vTrack) {
-          vTrack.innerHTML = '';
-          videos.forEach(v => {
-            vTrack.appendChild(createVideoCard(v));
-          });
-          initVideosCarousel();
-        }
-
-        if (vTrackHome) {
-          vTrackHome.innerHTML = '';
-          videos.slice(0, 3).forEach(v => {
-            vTrackHome.appendChild(createVideoCard(v));
-          });
-        }
-
-        // Actualizar contador de vídeos si no viniera de channel.json
-        const vidEls = document.querySelectorAll('.yt-dynamic-vids');
-        vidEls.forEach(el => {
-          if (!el.textContent.includes('vídeos')) {
-            el.textContent = `${videos.length} vídeos`;
-          }
-        });
+      if (chan.video_count) {
+        vidEls.forEach(el => el.textContent = `${chan.video_count} vídeos`);
       }
     }
 
-    // B) Cargar juegos desde games.json
-    const gRes = await fetch(`games.json?_t=${Date.now()}`);
-    if (gRes.ok) {
-      const games = await gRes.json();
-      if (Array.isArray(games) && games.length > 0) {
-        const gTrack = document.getElementById('carouselTrack');
-        const gTrackHome = document.getElementById('carouselTrackHome');
+    // Videos
+    if (videosResult.status === 'fulfilled' && Array.isArray(videosResult.value) && videosResult.value.length > 0) {
+      const videos = videosResult.value;
+      const vTrack = document.getElementById('videoTrack');
+      const vTrackHome = document.getElementById('videoTrackHome');
 
-        if (gTrack) {
-          gTrack.innerHTML = '';
-          games.forEach(g => {
-            gTrack.appendChild(createGameCard(g, true));
-          });
-          initGamesCarousel();
-        }
+      if (vTrack) {
+        vTrack.innerHTML = '';
+        videos.forEach(v => {
+          vTrack.appendChild(createVideoCard(v));
+        });
+        initVideosCarousel();
+      }
 
-        if (gTrackHome) {
-          gTrackHome.innerHTML = '';
-          games.slice(0, 3).forEach(g => {
-            gTrackHome.appendChild(createGameCard(g, false));
-          });
+      if (vTrackHome) {
+        vTrackHome.innerHTML = '';
+        videos.slice(0, 3).forEach(v => {
+          vTrackHome.appendChild(createVideoCard(v));
+        });
+      }
+
+      const vidEls = document.querySelectorAll('.yt-dynamic-vids');
+      vidEls.forEach(el => {
+        if (!el.textContent.includes('vídeos')) {
+          el.textContent = `${videos.length} vídeos`;
         }
+      });
+    }
+
+    // Juegos
+    if (gamesResult.status === 'fulfilled' && Array.isArray(gamesResult.value) && gamesResult.value.length > 0) {
+      allLoadedGames = gamesResult.value;
+      renderFilteredGames();
+
+      const gTrackHome = document.getElementById('carouselTrackHome');
+      if (gTrackHome) {
+        gTrackHome.innerHTML = '';
+        allLoadedGames.slice(0, 3).forEach(g => {
+          gTrackHome.appendChild(createGameCard(g, false));
+        });
       }
     }
 
     updateAllBookmarkButtons();
   } catch (e) {
-    console.warn("Carga dinámica completada.");
+    console.warn("Carga dinamica completada.");
   }
 }
 
