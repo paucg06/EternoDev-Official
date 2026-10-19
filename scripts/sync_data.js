@@ -10,16 +10,11 @@ const { URL } = require('url');
 
 function saveJsonFile(filename, data) {
   const jsonStr = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-  fs.writeFileSync(filename, jsonStr, 'utf-8');
-  try {
-    const srcDir = path.join('src', 'json');
-    if (!fs.existsSync(srcDir)) {
-      fs.mkdirSync(srcDir, { recursive: true });
-    }
-    fs.writeFileSync(path.join(srcDir, path.basename(filename)), jsonStr, 'utf-8');
-  } catch (err) {
-    console.warn(`Aviso al escribir en src/json/${filename}:`, err.message);
+  const srcDir = path.join('src', 'json');
+  if (!fs.existsSync(srcDir)) {
+    fs.mkdirSync(srcDir, { recursive: true });
   }
+  fs.writeFileSync(path.join(srcDir, path.basename(filename)), jsonStr, 'utf-8');
 }
 
 function fetchUrl(urlStr, options = {}, maxRedirects = 5) {
@@ -272,16 +267,18 @@ function generateAdsJson() {
   let videos = [];
 
   try {
-    if (fs.existsSync('games.json')) {
-      games = JSON.parse(fs.readFileSync('games.json', 'utf-8'));
+    const gamesPath = path.join('src', 'json', 'games.json');
+    if (fs.existsSync(gamesPath)) {
+      games = JSON.parse(fs.readFileSync(gamesPath, 'utf-8'));
     }
   } catch (e) {
     console.warn("Aviso leyendo games.json para ads:", e.message);
   }
 
   try {
-    if (fs.existsSync('videos.json')) {
-      videos = JSON.parse(fs.readFileSync('videos.json', 'utf-8'));
+    const videosPath = path.join('src', 'json', 'videos.json');
+    if (fs.existsSync(videosPath)) {
+      videos = JSON.parse(fs.readFileSync(videosPath, 'utf-8'));
     }
   } catch (e) {
     console.warn("Aviso leyendo videos.json para ads:", e.message);
