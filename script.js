@@ -159,6 +159,33 @@ function initWebVisitCounter() {
   }
 }
 
+// ==========================================================================
+// Parallax interactivo para los objetos flotantes 3D en Sobre Mi
+// ==========================================================================
+function initAboutParallax() {
+  const aboutTab = document.getElementById('tab-about');
+  if (!aboutTab) return;
+
+  aboutTab.addEventListener('mousemove', (e) => {
+    const rect = aboutTab.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+    const items = aboutTab.querySelectorAll('.crazy-floating-item');
+    items.forEach((item, idx) => {
+      const depth = (idx % 3 + 1) * 16;
+      item.style.transform = `translate3d(${relX * depth}px, ${relY * depth}px, 0)`;
+    });
+  });
+
+  aboutTab.addEventListener('mouseleave', () => {
+    const items = aboutTab.querySelectorAll('.crazy-floating-item');
+    items.forEach(item => {
+      item.style.transform = '';
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTabNavigation();
   initGamesCarousel();
@@ -166,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDynamicData();
   updateAllBookmarkButtons();
   initWebVisitCounter();
+  initAboutParallax();
 });
 
 // Modales interactivos (Guardados & Notificaciones)
