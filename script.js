@@ -890,6 +890,11 @@ function createVideoCard(v) {
 
 // 3. Cargar datos concurrentemente con Promise.allSettled
 async function loadDynamicData() {
+  if (window.location.protocol === 'file:') {
+    // Al abrir localmente (protocolo file://), los navegadores bloquean fetch() por seguridad CORS.
+    // Los datos iniciales ya estan renderizados en el HTML.
+    return;
+  }
   try {
     const [channelResult, videosResult, gamesResult] = await Promise.allSettled([
       fetch(`channel.json?_t=${Date.now()}`).then(r => r.ok ? r.json() : null),
