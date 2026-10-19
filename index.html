@@ -116,6 +116,30 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    ::selection {
+      background-color: #FDD31D;
+      color: #0C0D13;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #14141D;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2D2D3B;
+      border-radius: 5px;
+      border: 2px solid #14141D;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FDD31D;
+    }
+
     a {
       color: inherit;
       text-decoration: none;
@@ -223,9 +247,9 @@
     }
 
     .nav-tab-btn.active {
-      color: #FFFFFF;
-      background: #2A2A35;
-      border-color: #34343C;
+      color: #FDD31D;
+      background: #252532;
+      border-color: #3D3D4E;
     }
 
     .nav-actions {
@@ -251,8 +275,8 @@
 
     .action-icon-btn:hover {
       background: #343442;
-      color: #FFFFFF;
-      border-color: rgba(255, 255, 255, 0.25);
+      color: #FDD31D;
+      border-color: #FDD31D;
       transform: translateY(-1px);
     }
 
@@ -287,13 +311,14 @@
 
     .btn-mint {
       background: #FDD31D;
-      color: #0B121E;
+      color: #0C0D13;
       font-weight: 800;
     }
 
     .btn-mint:hover {
-      background: #E5BE14;
-      transform: translateY(-1px);
+      background: #FCE14B;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(253, 211, 29, 0.25);
     }
 
     .btn-white {
@@ -307,14 +332,16 @@
     }
 
     .btn-outline {
-      background: #2A2A35;
-      border: 1px solid #34343C;
+      background: #252532;
+      border: 1px solid #383848;
       color: #FFFFFF;
     }
 
     .btn-outline:hover {
-      background: #343442;
-      border-color: rgba(255, 255, 255, 0.25);
+      background: #2E2E3C;
+      border-color: #FDD31D;
+      color: #FDD31D;
+      transform: translateY(-2px);
     }
 
     /* Botón Hamburguesa Móvil */
@@ -425,6 +452,22 @@
       gap: 22px;
     }
 
+    .hero-studio-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #FDD31D;
+      background: #252532;
+      border: 1px solid #383848;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      margin-bottom: -4px;
+    }
+
     .hero-title {
       font-size: 3.4rem;
       font-weight: 900;
@@ -480,21 +523,32 @@
     .video-card-item {
       flex: 0 0 calc((100% - 40px) / 3);
       min-width: 0;
-      background: #2A2A35;
-      border: 1px solid #34343C;
+      background: #252532;
+      border: 1px solid #363646;
       border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       box-sizing: border-box;
       cursor: pointer;
     }
 
     .game-card-item:hover,
     .video-card-item:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-5px);
+      border-color: #FDD31D;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .game-card-item:hover .game-thumb-img,
+    .video-card-item:hover .video-thumb-img {
+      transform: scale(1.05);
+    }
+
+    .game-card-item:hover .game-item-title,
+    .video-card-item:hover .video-item-title {
+      color: #FDD31D;
     }
 
     .game-thumb-box {
@@ -639,7 +693,7 @@
     }
 
     .video-cta-text {
-      color: #00F59B;
+      color: #FDD31D;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
@@ -648,7 +702,7 @@
     }
 
     .video-card-item:hover .video-cta-text {
-      color: #00D587;
+      color: #FCE14B;
     }
 
     /* Itch.io Meta Badges & User Custom SVGs */
@@ -780,18 +834,27 @@
     }
 
     .app-box-card {
-      background: #2A2A35;
-      border: 1px solid #34343C;
+      background: #252532;
+      border: 1px solid #363646;
       border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .app-box-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-5px);
+      border-color: #FDD31D;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .app-box-card:hover .app-name-title {
+      color: #FDD31D;
+    }
+
+    .app-box-card:hover .app-preview-img {
+      transform: scale(1.05);
     }
 
     .app-top-header {
@@ -905,6 +968,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
     }
 
     .app-details-dark {
@@ -2037,13 +2101,15 @@
       color: #FFFFFF;
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
       box-sizing: border-box;
       font-family: inherit;
     }
 
     .search-input-field:focus {
       border-color: #FDD31D;
+      background-color: #161622;
+      box-shadow: 0 0 0 2px rgba(253, 211, 29, 0.18);
     }
 
     .search-input-icon {
@@ -2215,9 +2281,10 @@
       font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
-      padding: 4px 8px;
-      transition: color 0.15s ease;
+      padding: 6px 12px;
+      transition: color 0.15s ease, transform 0.15s ease;
       font-family: inherit;
+      position: relative;
     }
 
     .mobile-bottom-nav-btn svg {
@@ -2227,6 +2294,18 @@
 
     .mobile-bottom-nav-btn.active {
       color: #FDD31D;
+    }
+
+    .mobile-bottom-nav-btn.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 3px;
+      background-color: #FDD31D;
+      border-radius: 2px;
     }
 
     @media (max-width: 768px) {
@@ -2375,6 +2454,7 @@
       <!-- Hero Section -->
       <section class="hero-section">
         <div class="container hero-container">
+          <div class="hero-studio-badge">Estudio Indie Independiente</div>
           <h1 class="hero-title">
             Desarrolla, publica y juega. Videojuegos y herramientas.
           </h1>
