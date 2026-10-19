@@ -369,15 +369,14 @@ function generateAdsJson() {
     ads
   };
 
-  // Crear carpeta youplanner si no existe
-  if (!fs.existsSync('youplanner')) {
-    fs.mkdirSync('youplanner', { recursive: true });
+  // Crear carpeta ads si no existe
+  if (!fs.existsSync('ads')) {
+    fs.mkdirSync('ads', { recursive: true });
   }
 
-  // Guardar en youplanner/ads.json y en ads.json (raíz y src/json)
-  fs.writeFileSync('youplanner/ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
-  saveJsonFile('ads.json', adsPayload);
-  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas en youplanner/ads.json, ads.json y src/json/ads.json`);
+  // Guardar en ads/youplanner_ads.json
+  fs.writeFileSync('ads/youplanner_ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
+  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas en ads/youplanner_ads.json`);
 }
 
 async function main() {
