@@ -408,10 +408,6 @@ function switchTab(tabId, updateUrl = true) {
     btn.classList.toggle('active', btn.getAttribute('data-target') === tabId);
   });
 
-  const mobileBottomButtons = document.querySelectorAll('.mobile-bottom-nav-btn');
-  mobileBottomButtons.forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-target') === tabId);
-  });
 
   const targetTab = document.getElementById(`tab-${tabId}`);
   if (targetTab) {
