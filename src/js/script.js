@@ -422,6 +422,17 @@ function switchTab(tabId, updateUrl = true) {
     }
   }
 
+  // Actualizar el título de la pestaña del navegador dinámicamente
+  const tabTitles = {
+    home: 'EternoDev - Home',
+    games: 'EternoDev - Juegos',
+    apps: 'EternoDev - Aplicaciones',
+    videos: 'EternoDev - Vídeos',
+    about: 'EternoDev - Sobre Mí',
+    community: 'EternoDev - Comunidad'
+  };
+  document.title = tabTitles[tabId] || 'EternoDev - Home';
+
   if (tabId === 'home' || tabId === 'games') {
     setTimeout(initGamesCarousel, 50);
   }
@@ -467,6 +478,8 @@ function initTabNavigation() {
     if (current === 'juegos') switchTab('games');
     else if (current === 'sobre-mi') switchTab('about');
     else switchTab(current);
+  } else {
+    switchTab('home', false);
   }
 }
 
