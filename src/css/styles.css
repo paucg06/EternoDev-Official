@@ -370,11 +370,7 @@
       background: #16161E;
       color: #FDD31D;
       border-color: #34343C;
-      border-bottom: 2px solid #FDD31D;
-      text-decoration: underline;
-      text-decoration-color: #FDD31D;
-      text-underline-offset: 4px;
-      text-decoration-thickness: 2px;
+      text-decoration: none;
     }
 
     .mobile-dropdown-btn.active .tab-icon-svg {
@@ -386,7 +382,6 @@
       background: #16161E;
       color: #FDD31D;
       border-color: #34343C;
-      border-bottom: 2px solid #FDD31D;
     }
 
     /* Pestanias */
