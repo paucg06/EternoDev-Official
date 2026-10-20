@@ -1236,7 +1236,7 @@
        SECCION COMUNIDAD - ESTILO CRAZYGAMES DEVELOPER (CON PORTATIL / LAPTOP)
        ========================================================================== */
     .comm-hero-section {
-      background-color: #1F1938;
+      background-color: #1D1D26;
       padding: 70px 24px 0;
       position: relative;
     }
@@ -1428,120 +1428,19 @@
 
     .comm-laptop-inner-screen {
       flex: 1;
-      background: #16161E;
+      background: #12121A;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      padding: 14px 18px;
-      color: #FFFFFF;
-      position: relative;
-    }
-
-    .comm-screen-hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #252533;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-    }
-
-    .comm-screen-logo {
-      height: 18px;
-      width: auto;
-    }
-
-    .comm-screen-tag {
-      font-size: 0.68rem;
-      font-weight: 800;
-      color: #0C0D13;
-      background: #FDD31D;
-      padding: 2px 8px;
-      border-radius: 999px;
-    }
-
-    .comm-screen-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      flex: 1;
-    }
-
-    .comm-screen-brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .comm-screen-avatar {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1px solid #FDD31D;
-      object-fit: cover;
-    }
-
-    .comm-screen-card {
-      background: #20202C;
-      border: 1px solid #323242;
-      border-radius: 8px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .comm-screen-thumb-box {
-      width: 100%;
-      height: 68px;
-      background: #14141E;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
 
-    .comm-screen-thumb-img {
+    .comm-laptop-screen-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .comm-screen-thumb-img-contain {
-      width: 44px;
-      height: 44px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .comm-screen-thumb-custom {
-      background: #2A1F48;
-    }
-
-    .comm-screen-card-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .comm-screen-card-badge {
-      font-size: 0.6rem;
-      font-weight: 800;
-      color: #0C0D13;
-      background: #FDD31D;
-      padding: 1px 6px;
-      border-radius: 4px;
-      width: fit-content;
-    }
-
-    .comm-screen-card-title {
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin: 4px 0 0;
     }
 
     .comm-laptop-base {
@@ -1641,11 +1540,10 @@
     }
 
     .comm-quote-avatar {
-      width: 68px;
-      height: 68px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      border: 2px solid #FDD31D;
+      border: none;
       object-fit: cover;
       margin-bottom: 12px;
       background: #252532;
