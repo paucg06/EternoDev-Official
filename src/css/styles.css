@@ -1469,7 +1469,8 @@
     .comm-feature-icon {
       width: 54px;
       height: 54px;
-      margin-bottom: 18px;
+      margin-top: 18px;
+      margin-bottom: 14px;
       color: #FDD31D;
       display: flex;
       align-items: center;
