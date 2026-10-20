@@ -1046,7 +1046,7 @@
       text-align: center;
       padding: 70px 24px 25px;
       background-color: #1D1D26;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .crazy-hero-wrapper {
@@ -1067,7 +1067,6 @@
 
     .crazy-hero-title span {
       color: #FDD31D;
-      text-shadow: 0 0 35px rgba(253, 211, 29, 0.4);
     }
 
     .crazy-hero-desc {
