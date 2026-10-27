@@ -457,15 +457,22 @@ window.addEventListener('popstate', (e) => {
 });
 
 function initTabNavigation() {
-  // Comprobar redirección desde 404 (para recargas directas en GitHub Pages)
+  const routeMap = {
+    'juegos': 'games',
+    'sobre-mi': 'about',
+    'sobremi': 'about',
+    'aplicaciones': 'apps',
+    'comunidad': 'community'
+  };
+
+  // Comprobar redireccion desde 404 (para recargas directas en GitHub Pages)
   const redirectedPath = sessionStorage.getItem('spa_redirect');
   if (redirectedPath) {
     sessionStorage.removeItem('spa_redirect');
     const clean = redirectedPath.toLowerCase();
-    if (['home', 'games', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(clean)) {
-      if (clean === 'juegos') switchTab('games');
-      else if (clean === 'sobre-mi') switchTab('about');
-      else switchTab(clean);
+    const target = routeMap[clean] || clean;
+    if (['home', 'games', 'apps', 'videos', 'about', 'community'].includes(target)) {
+      switchTab(target);
       return;
     }
   }
@@ -473,11 +480,10 @@ function initTabNavigation() {
   const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
   const hash = window.location.hash.replace('#', '').toLowerCase();
   const current = path || hash;
+  const target = routeMap[current] || current;
 
-  if (['home', 'games', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(current)) {
-    if (current === 'juegos') switchTab('games');
-    else if (current === 'sobre-mi') switchTab('about');
-    else switchTab(current);
+  if (['home', 'games', 'apps', 'videos', 'about', 'community'].includes(target)) {
+    switchTab(target);
   } else {
     switchTab('home', false);
   }

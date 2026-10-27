@@ -4,6 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página no encontrada - EternoDev</title>
+
+  <!-- Redirección SPA instantánea antes del renderizado para evitar parpadeos en GitHub Pages -->
+  <script>
+    (function() {
+      var validRoutes = ['home', 'games', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi', 'sobremi', 'aplicaciones', 'comunidad'];
+      var path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+      if (validRoutes.indexOf(path) !== -1) {
+        sessionStorage.setItem('spa_redirect', path);
+        window.location.replace('/');
+      } else {
+        document.documentElement.classList.add('is-real-404');
+      }
+    })();
+  </script>
+  <style>
+    /* Ocultar el cuerpo por defecto para prevenir cualquier fotograma visible en rutas SPA */
+    body.page-404 {
+      display: none;
+    }
+    html.is-real-404 body.page-404 {
+      display: flex;
+    }
+  </style>
+
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="192x192" href="src/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +40,5 @@
   <h1 class="error-title">Página no encontrada</h1>
   <p class="error-desc">La ruta a la que intentas acceder no existe o ha sido movida. Puedes volver al inicio para explorar videojuegos, aplicaciones y vídeos.</p>
   <a href="/" class="btn-home">Volver al Inicio</a>
-  <script src="src/js/script.js"></script>
 </body>
 </html>
