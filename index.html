@@ -208,24 +208,41 @@
          ==================================================================== -->
     <div id="tab-home" class="tab-view active-tab">
       
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="container hero-container">
-          <h1 class="hero-title">
-            Desarrolla, publica y juega. Videojuegos y herramientas.
-          </h1>
+      <!-- Hero Banner Slider con botones superpuestos (Estilo Hero Card) -->
+      <section class="home-hero-banner-section">
+        <div class="container">
+          <div class="home-hero-banner" id="homeHeroBanner">
+            <!-- Slide 1: Original -->
+            <div class="banner-slide active" data-index="0">
+              <img src="src/img/banner.png" alt="EternoDev Banner" class="banner-slide-img" />
+            </div>
+            <!-- Slide 2: Con filtro de color suave -->
+            <div class="banner-slide filter-tint" data-index="1">
+              <img src="src/img/banner2.png" alt="EternoDev Banner Alternativo" class="banner-slide-img" />
+            </div>
 
-          <p class="hero-desc">
-            EternoDev es un desarrollador indie centrado en la creación de videojuegos en Unity, software de escritorio, herramientas web y divulgación digital.
-          </p>
-
-          <div class="hero-cta-group">
-            <button onclick="switchTab('games')" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
-              Explorar Juegos
-            </button>
-            <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
-              Ver Aplicaciones
-            </button>
+            <!-- Botones superpuestos en el banner (visual y estilos idénticos) -->
+            <div class="banner-content-overlay">
+              <div class="banner-actions">
+                <button onclick="switchTab('games')" class="banner-cta-btn banner-cta-primary">
+                  <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.5 5H5.5C3 5 1 7 1 9.5v5C1 16.9 2.9 18.8 5.2 18.9c1.3.1 2.5-.5 3.3-1.6l.8-1.3h5.4l.8 1.3c.8 1.1 2 1.7 3.3 1.6C21.1 18.8 23 16.9 23 14.5v-5C23 7 21 5 18.5 5zM7.5 13H6.2v1.3c0 .4-.3.7-.7.7s-.7-.3-.7-.7V13H3.5c-.4 0-.7-.3-.7-.7s.3-.7.7-.7h1.3v-1.3c0-.4.3-.7.7-.7s.7.3.7.7v1.3h1.3c.4 0 .7.3.7.7s-.3.7-.7.7zm9-1.5c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2zm2.5 2.5c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2z"/>
+                  </svg>
+                  Explorar Juegos
+                </button>
+                <button onclick="switchTab('apps')" class="banner-cta-btn banner-cta-secondary">
+                  <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/>
+                  </svg>
+                  Ver Aplicaciones
+                </button>
+              </div>
+              <!-- Indicadores discretos de posición de banner (Dots) -->
+              <div class="banner-slider-dots">
+                <button class="banner-dot active" onclick="goToBannerSlide(0)" aria-label="Banner 1"></button>
+                <button class="banner-dot" onclick="goToBannerSlide(1)" aria-label="Banner 2"></button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -494,7 +511,7 @@
       <section class="carousel-section" style="padding-top: 50px;">
         <div class="container">
           <div class="section-header-center">
-            <h1 class="section-main-heading">Videojuegos Indie</h1>
+            <h1 class="section-main-heading">Videojuegos <span style="color: #0372A8;">Indie</span></h1>
             <p class="section-subtitle-center">
               Catálogo de videojuegos desarrollados en Unity. Títulos jugables directamente en el navegador, proyectos para PC y futuros lanzamientos en Steam y Google Play.
             </p>
@@ -1084,7 +1101,7 @@
       <section class="comm-hero-section">
         <div class="container">
           <div class="comm-header-center">
-            <h2 class="comm-main-title">Conéctate con la comunidad</h2>
+            <h2 class="comm-main-title">Conéctate con la <span style="color: #5661EA;">comunidad</span></h2>
             <p class="comm-main-desc">
               Comparte tu feedback, participa en el desarrollo de nuevos proyectos indie y mantente al día de cada avance.
             </p>

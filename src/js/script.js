@@ -287,7 +287,57 @@ function initReasonsSwipe() {
   }, { passive: true });
 }
 
+// ==========================================================================
+// Hero Banner Slider (Cambio dinámico cada 3 segundos con fundido)
+// ==========================================================================
+let bannerSlideInterval = null;
+let currentBannerIdx = 0;
+
+function initHeroBannerSlider() {
+  const container = document.getElementById('homeHeroBanner');
+  if (!container) return;
+  const slides = container.querySelectorAll('.banner-slide');
+  const dots = container.querySelectorAll('.banner-dot');
+  if (slides.length <= 1) return;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+    currentBannerIdx = index;
+  }
+
+  window.goToBannerSlide = function(index) {
+    showSlide(index);
+    startBannerTimer();
+  };
+
+  function nextSlide() {
+    const next = (currentBannerIdx + 1) % slides.length;
+    showSlide(next);
+  }
+
+  function startBannerTimer() {
+    if (bannerSlideInterval) clearInterval(bannerSlideInterval);
+    bannerSlideInterval = setInterval(nextSlide, 2000);
+  }
+
+  startBannerTimer();
+
+  // Pausar en hover para interacción fluida
+  container.onmouseenter = () => {
+    if (bannerSlideInterval) clearInterval(bannerSlideInterval);
+  };
+  container.onmouseleave = () => {
+    startBannerTimer();
+  };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initHeroBannerSlider();
   initTabNavigation();
   initGamesCarousel();
   initVideosCarousel();
@@ -433,6 +483,9 @@ function switchTab(tabId, updateUrl = true) {
   };
   document.title = tabTitles[tabId] || 'EternoDev - Home';
 
+  if (tabId === 'home') {
+    setTimeout(initHeroBannerSlider, 50);
+  }
   if (tabId === 'home' || tabId === 'games') {
     setTimeout(initGamesCarousel, 50);
   }
