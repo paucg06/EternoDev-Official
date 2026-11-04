@@ -948,6 +948,25 @@
       width: 34px;
     }
 
+    /* Estetica tipo bolitas (dots) del banner para la pestania Juegos (#carouselPills) */
+    #carouselPills .carousel-pill {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #carouselPills .carousel-pill:hover {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    #carouselPills .carousel-pill.active {
+      width: 24px;
+      border-radius: 6px;
+      background: #FDD31D;
+    }
+
     /* Aplicaciones Grid */
     .apps-section {
       padding: 60px 0 80px;
