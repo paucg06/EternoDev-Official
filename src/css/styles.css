@@ -460,7 +460,7 @@
       justify-content: center;
       gap: 8px;
       padding: 13px 28px;
-      border-radius: var(--radius-pill);
+      border-radius: 8px;
       font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
