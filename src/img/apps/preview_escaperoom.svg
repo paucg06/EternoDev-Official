@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#14141C"/>
+  <rect x="120" y="70" width="1040" height="580" rx="16" fill="#1B1B26" stroke="#2B2B3B" stroke-width="2"/>
+  
+  <!-- Barra superior del panel de investigacion -->
+  <rect x="150" y="100" width="980" height="48" rx="8" fill="#242434"/>
+  <circle cx="180" cy="124" r="6" fill="#FA5C5C"/>
+  <circle cx="200" cy="124" r="6" fill="#FDD31D"/>
+  <circle cx="220" cy="124" r="6" fill="#38BDF8"/>
+  <text x="250" y="131" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" fill="#CCCCCE">Expediente Escape Room — Casos de Investigación &amp; Documentación</text>
+  <rect x="980" y="112" width="130" height="24" rx="4" fill="#FDD31D"/>
+  <text x="1045" y="128" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" fill="#14141C" text-anchor="middle">CONFIDENCIAL</text>
+  
+  <!-- Tablero de investigacion izquierdo (Documentos, pistas, fotos) -->
+  <rect x="150" y="166" width="670" height="454" rx="10" fill="#121218"/>
+  
+  <!-- Tarjetas de documentos de escape room dentro del tablero -->
+  <!-- Expediente 1 -->
+  <rect x="180" y="196" width="280" height="180" rx="8" fill="#1F1F2B" stroke="#36364A" stroke-width="1.5"/>
+  <rect x="200" y="216" width="70" height="20" rx="4" fill="#FDD31D"/>
+  <text x="235" y="230" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#14141C" text-anchor="middle">CASO #01</text>
+  <text x="200" y="260" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">El Misterio del Archivo</text>
+  <text x="200" y="282" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#8E8E9F">Kit descargable con audios, llaves</text>
+  <text x="200" y="300" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#8E8E9F">cifrados y pruebas forenses.</text>
+  <line x1="200" y1="324" x2="440" y2="324" stroke="#2B2B3B" stroke-width="1"/>
+  <text x="200" y="348" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700" fill="#FDD31D">Documentación Completa (PDF)</text>
+
+  <!-- Expediente 2 -->
+  <rect x="490" y="196" width="300" height="180" rx="8" fill="#1F1F2B" stroke="#36364A" stroke-width="1.5"/>
+  <rect x="510" y="216" width="70" height="20" rx="4" fill="#38BDF8"/>
+  <text x="545" y="230" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#14141C" text-anchor="middle">CASO #02</text>
+  <text x="510" y="260" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">Protocolo Bloqueado</text>
+  <text x="510" y="282" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#8E8E9F">Escape Room inmersivo para grupos,</text>
+  <text x="510" y="300" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#8E8E9F">pistas guiadas y soluciones paso a paso.</text>
+  <line x1="510" y1="324" x2="770" y2="324" stroke="#2B2B3B" stroke-width="1"/>
+  <text x="510" y="348" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700" fill="#38BDF8">Kit Imprimible + Web interactiva</text>
+
+  <!-- Pistas inferiores / Enlaces de investigación -->
+  <rect x="180" y="400" width="610" height="196" rx="8" fill="#181822" stroke="#282836" stroke-width="1"/>
+  <!-- Hilos rojos de investigación estilo tablero -->
+  <line x1="320" y1="440" x2="480" y2="480" stroke="#FA5C5C" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="480" y1="480" x2="640" y2="440" stroke="#FA5C5C" stroke-width="2" stroke-dasharray="6,4"/>
+  <circle cx="320" cy="440" r="5" fill="#FA5C5C"/>
+  <circle cx="480" cy="480" r="5" fill="#FA5C5C"/>
+  <circle cx="640" cy="440" r="5" fill="#FA5C5C"/>
+  <text x="485" y="535" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">Banco de Escape Rooms Listos para Jugar</text>
+  <text x="485" y="562" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="600" fill="#8E8E9F" text-anchor="middle">Archivos organizados, enigmas matemáticos, audios y atrezo para imprimir</text>
+
+  <!-- Panel lateral derecho (Comprar / Descargar / Monetizar) -->
+  <rect x="840" y="166" width="290" height="454" rx="10" fill="#20202E"/>
+  <text x="865" y="206" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">Adquirir Paquete</text>
+  <text x="865" y="230" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#8E8E9F">Acceso inmediato a la documentación</text>
+
+  <rect x="865" y="255" width="240" height="60" rx="8" fill="#28283A"/>
+  <text x="880" y="280" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#8E8E9F">Licencia Comercial / Eventos</text>
+  <text x="880" y="302" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="900" fill="#FDD31D">Descarga Digital</text>
+
+  <rect x="865" y="330" width="240" height="44" rx="6" fill="#181824"/>
+  <text x="880" y="357" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#CCCCCE">&#10003; Guía máster del director</text>
+  <rect x="865" y="386" width="240" height="44" rx="6" fill="#181824"/>
+  <text x="880" y="413" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#CCCCCE">&#10003; Enigmas y llaves cifradas</text>
+  <rect x="865" y="442" width="240" height="44" rx="6" fill="#181824"/>
+  <text x="880" y="469" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#CCCCCE">&#10003; Recursos multimedia</text>
+
+  <rect x="865" y="520" width="240" height="54" rx="8" fill="#FDD31D"/>
+  <text x="985" y="553" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="900" fill="#14141C" text-anchor="middle">Comprar Escape Room</text>
+</svg>

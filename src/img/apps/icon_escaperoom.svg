@@ -1,0 +1,17 @@
+<!-- Icono oficial Escape Room / Casos de Investigacion (EternoDev) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="22" fill="#1C1C26"/>
+  <rect x="2" y="2" width="96" height="96" rx="20" fill="none" stroke="#2E2E3E" stroke-width="2"/>
+  <!-- Carpeta de Expediente / Caso -->
+  <path d="M22 32 C22 28, 25 25, 29 25 L43 25 L49 32 L71 32 C75 32, 78 35, 78 39 L78 71 C78 75, 75 78, 71 78 L29 78 C25 78, 22 75, 22 71 Z" fill="#2A2A38" stroke="#FDD31D" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Documento que asoma -->
+  <rect x="30" y="38" width="40" height="32" rx="3" fill="#181822"/>
+  <!-- Lineas de texto de informe confidencial -->
+  <line x1="36" y1="46" x2="64" y2="46" stroke="#8E8E9F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="52" x2="56" y2="52" stroke="#8E8E9F" stroke-width="2" stroke-linecap="round"/>
+  <!-- Candado / Cerradura de Escape Room -->
+  <rect x="42" y="58" width="16" height="13" rx="3" fill="#FDD31D"/>
+  <path d="M46 58 L46 54 C46 51.8, 47.8 50, 50 50 C52.2 50, 54 51.8, 54 54 L54 58" fill="none" stroke="#FDD31D" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="50" cy="63.5" r="1.5" fill="#1C1C26"/>
+  <line x1="50" y1="65" x2="50" y2="68" stroke="#1C1C26" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
