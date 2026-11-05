@@ -549,7 +549,7 @@ function initTabNavigation() {
 }
 
 function getCardsPerView() {
-  if (window.innerWidth < 768) return 1;
+  if (window.innerWidth <= 768) return 1;
   if (window.innerWidth <= 1024) return 2;
   return 3;
 }
@@ -979,6 +979,18 @@ function filterHomeSearch() {
 
   const homeGameCards = document.querySelectorAll('#carouselTrackHome .game-card-item');
   homeGameCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!query || text.includes(query)) ? '' : 'none';
+  });
+
+  const homeWebCards = document.querySelectorAll('#webTrackHome .app-card-carousel-item');
+  homeWebCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!query || text.includes(query)) ? '' : 'none';
+  });
+
+  const homeSoftwareCards = document.querySelectorAll('#softwareTrackHome .app-card-carousel-item');
+  homeSoftwareCards.forEach(card => {
     const text = card.textContent.toLowerCase();
     card.style.display = (!query || text.includes(query)) ? '' : 'none';
   });
