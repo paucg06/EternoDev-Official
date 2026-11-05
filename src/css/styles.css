@@ -652,8 +652,10 @@
     }
 
     .game-card-item,
-    .video-card-item {
+    .video-card-item,
+    .app-card-carousel-item {
       flex: 0 0 calc((100% - 40px) / 3);
+      cursor: default;
       min-width: 0;
       background: #252532;
       border: 1px solid #363646;

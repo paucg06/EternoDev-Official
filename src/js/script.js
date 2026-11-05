@@ -4,6 +4,8 @@
 
 let currentGameIndex = 0;
 let currentVideoIndex = 0;
+let currentWebAppsIndex = 0;
+let currentDesktopAppsIndex = 0;
 
 // Iconos vectoriales personalizados del usuario (Windows, Linux, macOS)
 const PLATFORM_SVGS = {
@@ -492,6 +494,10 @@ function switchTab(tabId, updateUrl = true) {
   if (tabId === 'home' || tabId === 'videos') {
     setTimeout(initVideosCarousel, 50);
   }
+  if (tabId === 'apps') {
+    setTimeout(initWebAppsCarousel, 50);
+    setTimeout(initDesktopAppsCarousel, 50);
+  }
   if (tabId === 'about') {
     setTimeout(initCrazyCounters, 50);
   }
@@ -684,6 +690,144 @@ function initVideosCarousel() {
   };
 
   updateVideoCarousel();
+}
+
+// 3. Carrusel de Aplicaciones Web (tab-apps)
+function initWebAppsCarousel() {
+  const track = document.getElementById('webAppsTrack');
+  const prevBtn = document.getElementById('webAppsPrev');
+  const nextBtn = document.getElementById('webAppsNext');
+  const pillsContainer = document.getElementById('webAppsPills');
+
+  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
+
+  const totalCards = track.children.length;
+  const cardsPerView = getCardsPerView();
+  const maxIndex = Math.max(0, totalCards - cardsPerView);
+
+  pillsContainer.innerHTML = '';
+  const numPills = maxIndex + 1;
+
+  for (let i = 0; i < numPills; i++) {
+    const pill = document.createElement('div');
+    pill.className = `carousel-pill ${i === currentWebAppsIndex ? 'active' : ''}`;
+    pill.addEventListener('click', () => {
+      currentWebAppsIndex = i;
+      updateWebAppsCarousel();
+    });
+    pillsContainer.appendChild(pill);
+  }
+
+  function updateWebAppsCarousel() {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentWebAppsIndex > currentMax) currentWebAppsIndex = currentMax;
+
+    const firstCard = track.children[0];
+    if (!firstCard) return;
+
+    const cardRect = firstCard.getBoundingClientRect();
+    const cardWidth = cardRect.width;
+    const gap = 20;
+    const offset = currentWebAppsIndex * (cardWidth + gap);
+
+    track.style.transform = `translateX(-${offset}px)`;
+
+    const pills = pillsContainer.querySelectorAll('.carousel-pill');
+    pills.forEach((pill, idx) => {
+      pill.classList.toggle('active', idx === currentWebAppsIndex);
+    });
+
+    prevBtn.style.opacity = currentWebAppsIndex === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = currentWebAppsIndex >= currentMax ? '0.35' : '1';
+  }
+
+  prevBtn.onclick = () => {
+    if (currentWebAppsIndex > 0) {
+      currentWebAppsIndex--;
+      updateWebAppsCarousel();
+    }
+  };
+
+  nextBtn.onclick = () => {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentWebAppsIndex < currentMax) {
+      currentWebAppsIndex++;
+      updateWebAppsCarousel();
+    }
+  };
+
+  updateWebAppsCarousel();
+}
+
+// 4. Carrusel de Software de Escritorio (tab-apps)
+function initDesktopAppsCarousel() {
+  const track = document.getElementById('desktopAppsTrack');
+  const prevBtn = document.getElementById('desktopAppsPrev');
+  const nextBtn = document.getElementById('desktopAppsNext');
+  const pillsContainer = document.getElementById('desktopAppsPills');
+
+  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
+
+  const totalCards = track.children.length;
+  const cardsPerView = getCardsPerView();
+  const maxIndex = Math.max(0, totalCards - cardsPerView);
+
+  pillsContainer.innerHTML = '';
+  const numPills = maxIndex + 1;
+
+  for (let i = 0; i < numPills; i++) {
+    const pill = document.createElement('div');
+    pill.className = `carousel-pill ${i === currentDesktopAppsIndex ? 'active' : ''}`;
+    pill.addEventListener('click', () => {
+      currentDesktopAppsIndex = i;
+      updateDesktopAppsCarousel();
+    });
+    pillsContainer.appendChild(pill);
+  }
+
+  function updateDesktopAppsCarousel() {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentDesktopAppsIndex > currentMax) currentDesktopAppsIndex = currentMax;
+
+    const firstCard = track.children[0];
+    if (!firstCard) return;
+
+    const cardRect = firstCard.getBoundingClientRect();
+    const cardWidth = cardRect.width;
+    const gap = 20;
+    const offset = currentDesktopAppsIndex * (cardWidth + gap);
+
+    track.style.transform = `translateX(-${offset}px)`;
+
+    const pills = pillsContainer.querySelectorAll('.carousel-pill');
+    pills.forEach((pill, idx) => {
+      pill.classList.toggle('active', idx === currentDesktopAppsIndex);
+    });
+
+    prevBtn.style.opacity = currentDesktopAppsIndex === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = currentDesktopAppsIndex >= currentMax ? '0.35' : '1';
+  }
+
+  prevBtn.onclick = () => {
+    if (currentDesktopAppsIndex > 0) {
+      currentDesktopAppsIndex--;
+      updateDesktopAppsCarousel();
+    }
+  };
+
+  nextBtn.onclick = () => {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentDesktopAppsIndex < currentMax) {
+      currentDesktopAppsIndex++;
+      updateDesktopAppsCarousel();
+    }
+  };
+
+  updateDesktopAppsCarousel();
 }
 
 const DEFAULT_FALLBACK_GAMES = [
@@ -1035,6 +1179,8 @@ async function loadDynamicData() {
 window.addEventListener('resize', () => {
   initGamesCarousel();
   initVideosCarousel();
+  initWebAppsCarousel();
+  initDesktopAppsCarousel();
 });
 
 // Manejador SPA para pagina 404 en GitHub Pages
