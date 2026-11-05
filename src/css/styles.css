@@ -2094,6 +2094,11 @@
     }
 
     /* Responsive */
+    @media (max-width: 1070px) {
+      .desktop-nav { display: none !important; }
+      .mobile-menu-toggle { display: flex !important; }
+    }
+
     @media (max-width: 1024px) {
       .game-card-item,
       .video-card-item,
@@ -2110,8 +2115,6 @@
     }
 
     @media (max-width: 768px) {
-      .desktop-nav { display: none; }
-      .mobile-menu-toggle { display: flex; }
       .hero-title { font-size: 2.2rem; }
       .banner-white-title { font-size: 2rem; }
       .apps-grid-layout { grid-template-columns: 1fr; }

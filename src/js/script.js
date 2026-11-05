@@ -1193,6 +1193,16 @@ window.addEventListener('resize', () => {
   initVideosCarousel();
   initWebAppsCarousel();
   initDesktopAppsCarousel();
+  if (window.innerWidth > 1070) {
+    const dropdown = document.getElementById('mobileNavDropdown');
+    const btn = document.getElementById('mobileMenuBtn');
+    if (dropdown && dropdown.classList.contains('open')) {
+      dropdown.classList.remove('open');
+      if (btn) {
+        btn.innerHTML = `<svg viewBox="0 0 24 24" id="hamburgerIcon"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+      }
+    }
+  }
 });
 
 // Manejador SPA para pagina 404 en GitHub Pages
