@@ -2,12 +2,12 @@
   <rect width="1280" height="720" fill="#14141C"/>
   <rect x="120" y="70" width="1040" height="580" rx="16" fill="#1B1B26" stroke="#2B2B3B" stroke-width="2"/>
   
-  <!-- Barra superior del panel de investigacion Files 404 -->
+  <!-- Barra superior del panel de investigacion Files404 -->
   <rect x="150" y="100" width="980" height="48" rx="8" fill="#242434"/>
   <circle cx="180" cy="124" r="6" fill="#FA5C5C"/>
   <circle cx="200" cy="124" r="6" fill="#FDD31D"/>
   <circle cx="220" cy="124" r="6" fill="#38BDF8"/>
-  <text x="250" y="131" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" fill="#CCCCCE">Files 404 — Casos de Investigación &amp; Documentación Escape Room</text>
+  <text x="250" y="131" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" fill="#CCCCCE">Files404 — Casos de Investigación &amp; Documentación Escape Room</text>
   <rect x="980" y="112" width="130" height="24" rx="4" fill="#FDD31D"/>
   <text x="1045" y="128" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" fill="#14141C" text-anchor="middle">CONFIDENCIAL</text>
   
@@ -43,7 +43,7 @@
   <circle cx="320" cy="440" r="5" fill="#FA5C5C"/>
   <circle cx="480" cy="480" r="5" fill="#FA5C5C"/>
   <circle cx="640" cy="440" r="5" fill="#FA5C5C"/>
-  <text x="485" y="535" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">Files 404 — Casos de Investigación</text>
+  <text x="485" y="535" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">Files404 — Casos de Investigación</text>
   <text x="485" y="562" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="600" fill="#8E8E9F" text-anchor="middle">Archivos organizados, enigmas matemáticos, audios y atrezo para imprimir</text>
 
   <!-- Panel lateral derecho (Comprar / Descargar / Monetizar) -->
