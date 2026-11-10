@@ -554,12 +554,19 @@ function getCardsPerView() {
   return 3;
 }
 
-// 1. Carrusel de Juegos (tab-games)
-function initGamesCarousel() {
-  const track = document.getElementById('carouselTrack');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  const pillsContainer = document.getElementById('carouselPills');
+// Controlador Generico Reutilizable para Carruseles (Juegos, Videos, Apps Web, Software Escritorio)
+function setupGenericCarousel({
+  trackId,
+  prevBtnId,
+  nextBtnId,
+  pillsContainerId,
+  getIndex,
+  setIndex
+}) {
+  const track = document.getElementById(trackId);
+  const prevBtn = document.getElementById(prevBtnId);
+  const nextBtn = document.getElementById(nextBtnId);
+  const pillsContainer = document.getElementById(pillsContainerId);
 
   if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
 
@@ -567,14 +574,20 @@ function initGamesCarousel() {
   const cardsPerView = getCardsPerView();
   const maxIndex = Math.max(0, totalCards - cardsPerView);
 
+  let currentIndex = getIndex();
+  if (currentIndex > maxIndex) {
+    currentIndex = maxIndex;
+    setIndex(currentIndex);
+  }
+
   pillsContainer.innerHTML = '';
   const numPills = maxIndex + 1;
 
   for (let i = 0; i < numPills; i++) {
     const pill = document.createElement('div');
-    pill.className = `carousel-pill ${i === currentGameIndex ? 'active' : ''}`;
+    pill.className = `carousel-pill ${i === currentIndex ? 'active' : ''}`;
     pill.addEventListener('click', () => {
-      currentGameIndex = i;
+      setIndex(i);
       updateCarousel();
     });
     pillsContainer.appendChild(pill);
@@ -583,7 +596,11 @@ function initGamesCarousel() {
   function updateCarousel() {
     const currentCardsPerView = getCardsPerView();
     const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentGameIndex > currentMax) currentGameIndex = currentMax;
+    let idx = getIndex();
+    if (idx > currentMax) {
+      idx = currentMax;
+      setIndex(idx);
+    }
 
     const firstCard = track.children[0];
     if (!firstCard) return;
@@ -591,22 +608,23 @@ function initGamesCarousel() {
     const cardRect = firstCard.getBoundingClientRect();
     const cardWidth = cardRect.width;
     const gap = 20;
-    const offset = currentGameIndex * (cardWidth + gap);
+    const offset = idx * (cardWidth + gap);
 
     track.style.transform = `translateX(-${offset}px)`;
 
     const pills = pillsContainer.querySelectorAll('.carousel-pill');
-    pills.forEach((pill, idx) => {
-      pill.classList.toggle('active', idx === currentGameIndex);
+    pills.forEach((pill, pIdx) => {
+      pill.classList.toggle('active', pIdx === idx);
     });
 
-    prevBtn.style.opacity = currentGameIndex === 0 ? '0.35' : '1';
-    nextBtn.style.opacity = currentGameIndex >= currentMax ? '0.35' : '1';
+    prevBtn.style.opacity = idx === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = idx >= currentMax ? '0.35' : '1';
   }
 
   prevBtn.onclick = () => {
-    if (currentGameIndex > 0) {
-      currentGameIndex--;
+    let idx = getIndex();
+    if (idx > 0) {
+      setIndex(idx - 1);
       updateCarousel();
     }
   };
@@ -614,8 +632,9 @@ function initGamesCarousel() {
   nextBtn.onclick = () => {
     const currentCardsPerView = getCardsPerView();
     const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentGameIndex < currentMax) {
-      currentGameIndex++;
+    let idx = getIndex();
+    if (idx < currentMax) {
+      setIndex(idx + 1);
       updateCarousel();
     }
   };
@@ -623,211 +642,52 @@ function initGamesCarousel() {
   updateCarousel();
 }
 
+// 1. Carrusel de Juegos (tab-games)
+function initGamesCarousel() {
+  setupGenericCarousel({
+    trackId: 'carouselTrack',
+    prevBtnId: 'carouselPrev',
+    nextBtnId: 'carouselNext',
+    pillsContainerId: 'carouselPills',
+    getIndex: () => currentGameIndex,
+    setIndex: val => { currentGameIndex = val; }
+  });
+}
+
 // 2. Carrusel de Vídeos de YouTube (tab-videos)
 function initVideosCarousel() {
-  const track = document.getElementById('videoTrack');
-  const prevBtn = document.getElementById('videoPrev');
-  const nextBtn = document.getElementById('videoNext');
-  const pillsContainer = document.getElementById('videoPills');
-
-  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
-
-  const totalCards = track.children.length;
-  const cardsPerView = getCardsPerView();
-  const maxIndex = Math.max(0, totalCards - cardsPerView);
-
-  pillsContainer.innerHTML = '';
-  const numPills = maxIndex + 1;
-
-  for (let i = 0; i < numPills; i++) {
-    const pill = document.createElement('div');
-    pill.className = `carousel-pill ${i === currentVideoIndex ? 'active' : ''}`;
-    pill.addEventListener('click', () => {
-      currentVideoIndex = i;
-      updateVideoCarousel();
-    });
-    pillsContainer.appendChild(pill);
-  }
-
-  function updateVideoCarousel() {
-    const currentCardsPerView = getCardsPerView();
-    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentVideoIndex > currentMax) currentVideoIndex = currentMax;
-
-    const firstCard = track.children[0];
-    if (!firstCard) return;
-
-    const cardRect = firstCard.getBoundingClientRect();
-    const cardWidth = cardRect.width;
-    const gap = 20;
-    const offset = currentVideoIndex * (cardWidth + gap);
-
-    track.style.transform = `translateX(-${offset}px)`;
-
-    const pills = pillsContainer.querySelectorAll('.carousel-pill');
-    pills.forEach((pill, idx) => {
-      pill.classList.toggle('active', idx === currentVideoIndex);
-    });
-
-    prevBtn.style.opacity = currentVideoIndex === 0 ? '0.35' : '1';
-    nextBtn.style.opacity = currentVideoIndex >= currentMax ? '0.35' : '1';
-  }
-
-  prevBtn.onclick = () => {
-    if (currentVideoIndex > 0) {
-      currentVideoIndex--;
-      updateVideoCarousel();
-    }
-  };
-
-  nextBtn.onclick = () => {
-    const currentCardsPerView = getCardsPerView();
-    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentVideoIndex < currentMax) {
-      currentVideoIndex++;
-      updateVideoCarousel();
-    }
-  };
-
-  updateVideoCarousel();
+  setupGenericCarousel({
+    trackId: 'videoTrack',
+    prevBtnId: 'videoPrev',
+    nextBtnId: 'videoNext',
+    pillsContainerId: 'videoPills',
+    getIndex: () => currentVideoIndex,
+    setIndex: val => { currentVideoIndex = val; }
+  });
 }
 
 // 3. Carrusel de Aplicaciones Web (tab-apps)
 function initWebAppsCarousel() {
-  const track = document.getElementById('webAppsTrack');
-  const prevBtn = document.getElementById('webAppsPrev');
-  const nextBtn = document.getElementById('webAppsNext');
-  const pillsContainer = document.getElementById('webAppsPills');
-
-  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
-
-  const totalCards = track.children.length;
-  const cardsPerView = getCardsPerView();
-  const maxIndex = Math.max(0, totalCards - cardsPerView);
-
-  pillsContainer.innerHTML = '';
-  const numPills = maxIndex + 1;
-
-  for (let i = 0; i < numPills; i++) {
-    const pill = document.createElement('div');
-    pill.className = `carousel-pill ${i === currentWebAppsIndex ? 'active' : ''}`;
-    pill.addEventListener('click', () => {
-      currentWebAppsIndex = i;
-      updateWebAppsCarousel();
-    });
-    pillsContainer.appendChild(pill);
-  }
-
-  function updateWebAppsCarousel() {
-    const currentCardsPerView = getCardsPerView();
-    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentWebAppsIndex > currentMax) currentWebAppsIndex = currentMax;
-
-    const firstCard = track.children[0];
-    if (!firstCard) return;
-
-    const cardRect = firstCard.getBoundingClientRect();
-    const cardWidth = cardRect.width;
-    const gap = 20;
-    const offset = currentWebAppsIndex * (cardWidth + gap);
-
-    track.style.transform = `translateX(-${offset}px)`;
-
-    const pills = pillsContainer.querySelectorAll('.carousel-pill');
-    pills.forEach((pill, idx) => {
-      pill.classList.toggle('active', idx === currentWebAppsIndex);
-    });
-
-    prevBtn.style.opacity = currentWebAppsIndex === 0 ? '0.35' : '1';
-    nextBtn.style.opacity = currentWebAppsIndex >= currentMax ? '0.35' : '1';
-  }
-
-  prevBtn.onclick = () => {
-    if (currentWebAppsIndex > 0) {
-      currentWebAppsIndex--;
-      updateWebAppsCarousel();
-    }
-  };
-
-  nextBtn.onclick = () => {
-    const currentCardsPerView = getCardsPerView();
-    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentWebAppsIndex < currentMax) {
-      currentWebAppsIndex++;
-      updateWebAppsCarousel();
-    }
-  };
-
-  updateWebAppsCarousel();
+  setupGenericCarousel({
+    trackId: 'webAppsTrack',
+    prevBtnId: 'webAppsPrev',
+    nextBtnId: 'webAppsNext',
+    pillsContainerId: 'webAppsPills',
+    getIndex: () => currentWebAppsIndex,
+    setIndex: val => { currentWebAppsIndex = val; }
+  });
 }
 
 // 4. Carrusel de Software de Escritorio (tab-apps)
 function initDesktopAppsCarousel() {
-  const track = document.getElementById('desktopAppsTrack');
-  const prevBtn = document.getElementById('desktopAppsPrev');
-  const nextBtn = document.getElementById('desktopAppsNext');
-  const pillsContainer = document.getElementById('desktopAppsPills');
-
-  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
-
-  const totalCards = track.children.length;
-  const cardsPerView = getCardsPerView();
-  const maxIndex = Math.max(0, totalCards - cardsPerView);
-
-  pillsContainer.innerHTML = '';
-  const numPills = maxIndex + 1;
-
-  for (let i = 0; i < numPills; i++) {
-    const pill = document.createElement('div');
-    pill.className = `carousel-pill ${i === currentDesktopAppsIndex ? 'active' : ''}`;
-    pill.addEventListener('click', () => {
-      currentDesktopAppsIndex = i;
-      updateDesktopAppsCarousel();
-    });
-    pillsContainer.appendChild(pill);
-  }
-
-  function updateDesktopAppsCarousel() {
-    const currentCardsPerView = getCardsPerView();
-    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentDesktopAppsIndex > currentMax) currentDesktopAppsIndex = currentMax;
-
-    const firstCard = track.children[0];
-    if (!firstCard) return;
-
-    const cardRect = firstCard.getBoundingClientRect();
-    const cardWidth = cardRect.width;
-    const gap = 20;
-    const offset = currentDesktopAppsIndex * (cardWidth + gap);
-
-    track.style.transform = `translateX(-${offset}px)`;
-
-    const pills = pillsContainer.querySelectorAll('.carousel-pill');
-    pills.forEach((pill, idx) => {
-      pill.classList.toggle('active', idx === currentDesktopAppsIndex);
-    });
-
-    prevBtn.style.opacity = currentDesktopAppsIndex === 0 ? '0.35' : '1';
-    nextBtn.style.opacity = currentDesktopAppsIndex >= currentMax ? '0.35' : '1';
-  }
-
-  prevBtn.onclick = () => {
-    if (currentDesktopAppsIndex > 0) {
-      currentDesktopAppsIndex--;
-      updateDesktopAppsCarousel();
-    }
-  };
-
-  nextBtn.onclick = () => {
-    const currentCardsPerView = getCardsPerView();
-    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentDesktopAppsIndex < currentMax) {
-      currentDesktopAppsIndex++;
-      updateDesktopAppsCarousel();
-    }
-  };
-
-  updateDesktopAppsCarousel();
+  setupGenericCarousel({
+    trackId: 'desktopAppsTrack',
+    prevBtnId: 'desktopAppsPrev',
+    nextBtnId: 'desktopAppsNext',
+    pillsContainerId: 'desktopAppsPills',
+    getIndex: () => currentDesktopAppsIndex,
+    setIndex: val => { currentDesktopAppsIndex = val; }
+  });
 }
 
 const DEFAULT_FALLBACK_GAMES = [
@@ -1188,21 +1048,27 @@ async function loadDynamicData() {
   }
 }
 
+let resizeDebounceTimer = null;
 window.addEventListener('resize', () => {
-  initGamesCarousel();
-  initVideosCarousel();
-  initWebAppsCarousel();
-  initDesktopAppsCarousel();
-  if (window.innerWidth > 1070) {
-    const dropdown = document.getElementById('mobileNavDropdown');
-    const btn = document.getElementById('mobileMenuBtn');
-    if (dropdown && dropdown.classList.contains('open')) {
-      dropdown.classList.remove('open');
-      if (btn) {
-        btn.innerHTML = `<svg viewBox="0 0 24 24" id="hamburgerIcon"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+  clearTimeout(resizeDebounceTimer);
+  resizeDebounceTimer = setTimeout(() => {
+    window.requestAnimationFrame(() => {
+      initGamesCarousel();
+      initVideosCarousel();
+      initWebAppsCarousel();
+      initDesktopAppsCarousel();
+      if (window.innerWidth > 1070) {
+        const dropdown = document.getElementById('mobileNavDropdown');
+        const btn = document.getElementById('mobileMenuBtn');
+        if (dropdown && dropdown.classList.contains('open')) {
+          dropdown.classList.remove('open');
+          if (btn) {
+            btn.innerHTML = `<svg viewBox="0 0 24 24" id="hamburgerIcon"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+          }
+        }
       }
-    }
-  }
+    });
+  }, 100);
 });
 
 // Manejador SPA para pagina 404 en GitHub Pages

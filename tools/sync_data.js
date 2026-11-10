@@ -8,13 +8,37 @@ const https = require('https');
 const http = require('http');
 const { URL } = require('url');
 
+let hasAnyDataChanged = false;
+
 function saveJsonFile(filename, data) {
   const jsonStr = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
   const srcDir = path.join('src', 'json');
   if (!fs.existsSync(srcDir)) {
     fs.mkdirSync(srcDir, { recursive: true });
   }
-  fs.writeFileSync(path.join(srcDir, path.basename(filename)), jsonStr, 'utf-8');
+  const targetPath = path.join(srcDir, path.basename(filename));
+  if (fs.existsSync(targetPath)) {
+    const existing = fs.readFileSync(targetPath, 'utf-8');
+    if (existing.trim() === jsonStr.trim()) {
+      return false;
+    }
+  }
+  fs.writeFileSync(targetPath, jsonStr, 'utf-8');
+  hasAnyDataChanged = true;
+  return true;
+}
+
+function updateSitemapLastMod() {
+  const sitemapPath = 'sitemap.xml';
+  if (fs.existsSync(sitemapPath) && hasAnyDataChanged) {
+    const today = new Date().toISOString().split('T')[0];
+    const content = fs.readFileSync(sitemapPath, 'utf-8');
+    const updated = content.replace(/<lastmod>[^<]+<\/lastmod>/, `<lastmod>${today}</lastmod>`);
+    if (updated !== content) {
+      fs.writeFileSync(sitemapPath, updated, 'utf-8');
+      console.log(`Sitemap actualizado con lastmod: ${today}`);
+    }
+  }
 }
 
 function fetchUrl(urlStr, options = {}, maxRedirects = 5) {
@@ -362,6 +386,26 @@ function generateAdsJson() {
     ]
   });
 
+  const adsFilePath = path.join('ads', 'youplanner_ads.json');
+  let previousAdsJson = null;
+
+  if (fs.existsSync(adsFilePath)) {
+    try {
+      const prevData = JSON.parse(fs.readFileSync(adsFilePath, 'utf-8'));
+      if (prevData && Array.isArray(prevData.ads)) {
+        previousAdsJson = JSON.stringify(prevData.ads);
+      }
+    } catch (e) {
+      // Ignorar error de parseo si el archivo estaba vacio o corrupto
+    }
+  }
+
+  const currentAdsJson = JSON.stringify(ads);
+  if (previousAdsJson === currentAdsJson) {
+    console.log("Sistema de Anuncios: Sin novedades en promociones de YouPlanner. No se reescribe el archivo.");
+    return;
+  }
+
   const adsPayload = {
     version: 1,
     generated_at: new Date().toISOString(),
@@ -374,15 +418,17 @@ function generateAdsJson() {
     fs.mkdirSync('ads', { recursive: true });
   }
 
-  // Guardar en ads/youplanner_ads.json
-  fs.writeFileSync('ads/youplanner_ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
-  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas en ads/youplanner_ads.json`);
+  // Guardar en ads/youplanner_ads.json solo cuando hay cambios reales
+  fs.writeFileSync(adsFilePath, JSON.stringify(adsPayload, null, 2), 'utf-8');
+  hasAnyDataChanged = true;
+  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas con cambios en ads/youplanner_ads.json`);
 }
 
 async function main() {
   await syncItchGames();
   await syncYouTubeVideos();
   generateAdsJson();
+  updateSitemapLastMod();
 }
 
 main();
