@@ -211,13 +211,13 @@ function initAboutParallax() {
 // ==========================================================================
 function getDevYearsExperience() {
   const now = new Date();
-  const startYear = 2018;
+  const startYear = 2019;
   const startMonth = 1; // Febrero (0-indexed: Enero=0, Febrero=1)
   let years = now.getFullYear() - startYear;
   if (now.getMonth() < startMonth) {
     years--;
   }
-  return Math.max(8, years);
+  return Math.max(7, years);
 }
 
 function initCrazyCounters() {
