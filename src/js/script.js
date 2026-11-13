@@ -209,7 +209,24 @@ function initAboutParallax() {
 // ==========================================================================
 // Animación CountUp de Estadísticas al hacer Scroll
 // ==========================================================================
+function getDevYearsExperience() {
+  const now = new Date();
+  const startYear = 2018;
+  const startMonth = 1; // Febrero (0-indexed: Enero=0, Febrero=1)
+  let years = now.getFullYear() - startYear;
+  if (now.getMonth() < startMonth) {
+    years--;
+  }
+  return Math.max(8, years);
+}
+
 function initCrazyCounters() {
+  const expCounter = document.getElementById('devYearsCounter');
+  if (expCounter) {
+    const years = getDevYearsExperience();
+    expCounter.setAttribute('data-target', years.toString());
+  }
+
   const counters = document.querySelectorAll('.crazy-counter-val');
   if (!counters.length) return;
 
