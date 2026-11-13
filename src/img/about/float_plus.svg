@@ -1,16 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500" fill="none">
-  <defs>
-    <filter id="dropShadow" x="-20%" y="-20%" width="150%" height="150%">
-      <feDropShadow dx="8" dy="22" stdDeviation="16" flood-color="rgba(2, 132, 199, 0.45)"/>
-    </filter>
-  </defs>
-  <g filter="url(#dropShadow)">
-    <polygon points="383.55,248.0 365.15,321.77 333.02,334.21 351.42,260.44" fill="#38BDF8" stroke="#BAE6FD" stroke-width="1.2" stroke-linejoin="round"/>
-    <polygon points="308.64,212.65 383.55,248.0 351.42,260.44 276.51,225.09" fill="#38BDF8" stroke="#BAE6FD" stroke-width="1.2" stroke-linejoin="round"/>
-    <polygon points="329.28,129.88 308.64,212.65 276.51,225.09 297.15,142.32" fill="#0369A1" stroke="#0284C7" stroke-width="1.2" stroke-linejoin="round"/>
-    <polygon points="262.52,98.37 329.28,129.88 297.15,142.32 230.39,110.81" fill="#38BDF8" stroke="#BAE6FD" stroke-width="1.2" stroke-linejoin="round"/>
-    <polygon points="290.25,286.42 269.61,369.19 237.48,381.63 258.12,298.86" fill="#0369A1" stroke="#0284C7" stroke-width="1.2" stroke-linejoin="round"/>
-    <polygon points="166.98,145.79 241.88,181.14 209.75,193.58 134.85,158.23" fill="#38BDF8" stroke="#BAE6FD" stroke-width="1.2" stroke-linejoin="round"/>
-    <polygon points="262.52,98.37 329.28,129.88 308.64,212.65 383.55,248.0 365.15,321.77 290.25,286.42 269.61,369.19 202.85,337.68 223.49,254.91 148.58,219.56 166.98,145.79 241.88,181.14" fill="#0284C7" stroke="#7DD3FC" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- 3D D-Pad / Console Cross con volumen solido y colores azules planos mate -->
+  <g id="cross3D">
+    <polygon points="318.89,142.75 301.57,217.77 320.85,240.75 338.17,165.73" fill="#0369A1" stroke="#0369A1" stroke-width="1" stroke-linejoin="round"/>
+    <polygon points="376.6,235.1 357.25,318.89 376.53,341.87 395.88,258.08" fill="#0369A1" stroke="#0369A1" stroke-width="1" stroke-linejoin="round"/>
+    <polygon points="357.25,318.89 282.23,301.57 301.51,324.55 376.53,341.87" fill="#075985" stroke="#075985" stroke-width="1" stroke-linejoin="round"/>
+    <polygon points="282.23,301.57 264.9,376.6 284.18,399.58 301.51,324.55" fill="#0369A1" stroke="#0369A1" stroke-width="1" stroke-linejoin="round"/>
+    <polygon points="264.9,376.6 181.11,357.25 200.39,380.23 284.18,399.58" fill="#075985" stroke="#075985" stroke-width="1" stroke-linejoin="round"/>
+    <polygon points="198.43,282.23 123.4,264.9 142.68,287.88 217.71,305.21" fill="#075985" stroke="#075985" stroke-width="1" stroke-linejoin="round"/>
+    <polygon points="235.1,123.4 318.89,142.75 301.57,217.77 376.6,235.1 357.25,318.89 282.23,301.57 264.9,376.6 181.11,357.25 198.43,282.23 123.4,264.9 142.75,181.11 217.77,198.43" fill="#0284C7" stroke="#0284C7" stroke-width="1" stroke-linejoin="round"/>
   </g>
 </svg>
