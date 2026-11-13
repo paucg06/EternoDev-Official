@@ -1223,7 +1223,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 70px 24px 25px;
+      padding: 50px 24px 25px;
       background-color: #1D1D26;
       overflow: visible;
     }
@@ -1432,7 +1432,7 @@
        ========================================================================== */
     .comm-hero-section {
       background-color: #1D1D26;
-      padding: 70px 24px 0;
+      padding: 50px 24px 0;
       position: relative;
     }
 
