@@ -885,7 +885,7 @@ function createGameCard(g, showBookmark = true) {
 
   let platformsHtml = '';
   if (isBrowser) {
-    platformsHtml += `<button type="button" class="badge-play-browser" onclick="event.preventDefault(); event.stopPropagation(); openGamePlayModal('${gameUrl}', '${escapedTitle}', '${gameUrl}')" title="Jugar en el navegador">Play in browser</button>`;
+    platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
   }
   if (isWin) platformsHtml += PLATFORM_SVGS.windows;
   if (isLin) platformsHtml += PLATFORM_SVGS.linux;

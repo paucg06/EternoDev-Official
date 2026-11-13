@@ -868,15 +868,8 @@
       line-height: 1.3;
       letter-spacing: 0.2px;
       border: none;
-      cursor: pointer;
       display: inline-block;
       font-family: inherit;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .badge-play-browser:hover {
-      background: #FDD31D;
-      color: #0C0D13;
     }
 
     .itch-platform-svg {
