@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-21T19:36:04.430Z",
+  "generated_at": "2026-11-21T21:13:00.784Z",
   "total_ads": 10,
   "ads": [
     {
@@ -71,7 +71,7 @@
       "subtitle": "¡Naciste gato, pero morirás como leyenda!",
       "action_text": "Jugar Gratis Online",
       "target_url": "https://eternodev.itch.io/castlecat-rpg",
-      "image_url": "https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png",
+      "image_url": "https://img.itch.zone/aW1nLzMyNjMyNTA3LnBuZw==/315x250%23c/0tkdZc.png",
       "features": [
         "Género: Adventure",
         "Jugable directamente en el navegador",
@@ -103,7 +103,7 @@
       "target_url": "https://eternodev.itch.io/soap-dodger",
       "image_url": "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
       "features": [
-        "Género: Action / Bullet Hell",
+        "Género: Action",
         "Jugable directamente en el navegador",
         "100% Gratuito en Itch.io"
       ]

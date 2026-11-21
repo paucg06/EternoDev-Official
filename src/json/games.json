@@ -3,7 +3,7 @@
     "id": 3533624,
     "title": "CastleCat RPG",
     "url": "https://eternodev.itch.io/castlecat-rpg",
-    "cover_url": "https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png",
+    "cover_url": "https://img.itch.zone/aW1nLzMyNjMyNTA3LnBuZw==/315x250%23c/0tkdZc.png",
     "short_text": "¡Naciste gato, pero morirás como leyenda!",
     "type": "html",
     "p_windows": false,
@@ -21,7 +21,7 @@
     "short_text": "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
     "type": "default",
     "p_windows": true,
-    "p_linux": true,
+    "p_linux": false,
     "p_osx": false,
     "published": true,
     "genre": "Fighting",
@@ -38,7 +38,7 @@
     "p_linux": true,
     "p_osx": true,
     "published": true,
-    "genre": "Action / Bullet Hell",
+    "genre": "Action",
     "p_browser": true
   },
   {
